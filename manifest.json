@@ -1,0 +1,32 @@
+{
+    "manifest_version":3,
+    "name":"Quick Canvas",
+    "version":"0.0.1",
+    "description":"Quick Solution for downloading a canvas",
+    "icons":{
+        "128":"",
+        "48":"",
+        "16":""
+    },
+    "actions": {
+        "default_title":"Quick Canvas",
+        "default_popup":"pages/popup.html",
+        "default_icon":{
+            "128":"",
+            "48":"",
+            "16":""
+        }
+    },
+    "content_scripts":[
+        {
+            "matches":["<all_urls>"],
+            "js":["scripts/content.js"]
+        }
+    ],
+    "background":{
+        "service_workers":"scripts/pageEvent.js",
+        "type":"module",
+        "persistant":false
+    },
+    "permissions": ["tabs"]
+}
