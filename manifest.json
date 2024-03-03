@@ -24,7 +24,7 @@
         }
     ],
     "background":{
-        "service_workers":"scripts/pageEvent.js",
+        "service_worker":"scripts/pageEvent.js",
         "type":"module",
         "persistant":false
     },
