@@ -4,17 +4,17 @@
     "version":"0.0.1",
     "description":"Quick Solution for downloading a canvas",
     "icons":{
-        "128":"",
-        "48":"",
-        "16":""
+        "128":"icons/128.png",
+        "48":"icons/48.png",
+        "16":"icons/16.png"
     },
-    "actions": {
+    "action": {
         "default_title":"Quick Canvas",
         "default_popup":"pages/popup.html",
         "default_icon":{
-            "128":"",
-            "48":"",
-            "16":""
+            "128":"icons/128.png",
+            "48":"icons/48.png",
+            "16":"icons/16.png"
         }
     },
     "content_scripts":[
