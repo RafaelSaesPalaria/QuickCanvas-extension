@@ -10,7 +10,18 @@ chrome.runtime.onMessage.addListener(function (message) {
     let c = canvas.getContext("2d")
     let img = new Image();
     img.onload = function() {
-        c.drawImage(img, 0, 0, 100, 100); // Draw the image onto the canvas
+        if (img.height>img.width) {
+        let r = img.width/img.height
+        canvas.width = r*canvas.height
+        c.drawImage(img, 0, 0, r*canvas.height, canvas.height); // Draw the image onto the canvas
+        
+        } else {
+            let r = img.height/img.width
+            canvas.height = r*canvas.width
+            c.drawImage(img, 0, 0, canvas.width, r*canvas.width);
+            
+            
+        }
     };
     img.src = message.x
     canvas.addEventListener("click",function () {
