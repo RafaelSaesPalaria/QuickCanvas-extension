@@ -5,13 +5,18 @@ let content = {
 chrome.runtime.sendMessage({todo:"miniatureCanvas"})
 
 chrome.runtime.onMessage.addListener(function (message) {
-    console.log(message.x[0])
+    console.log(message.x)
     let canvas = document.createElement("canvas");
     document.body.appendChild(canvas)
+    console.log(canvas)
     canvas.width = 100
     canvas.height= 100
     let c = canvas.getContext("2d")
-    c.drawImage(message.x[0],0,0)
+    let img = new Image();
+    img.onload = function() {
+        c.drawImage(img, 0, 0, 100, 100); // Draw the image onto the canvas
+    };
+    img.src = message.x
 
 })
 

@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(function name(message) {
         link.href = data
         link.click()
     } else if (message.todo == "miniatureCanvas") {
-        let canvas = document.querySelectorAll("canvas")
-        chrome.runtime.sendMessage({x:canvas})
+        let canvas = document.querySelector("canvas")
+        chrome.runtime.sendMessage({x:canvas.toDataURL()})
     }
 })
