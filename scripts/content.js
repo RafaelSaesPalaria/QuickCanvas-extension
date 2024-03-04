@@ -8,5 +8,8 @@ chrome.runtime.onMessage.addListener(function name(message) {
         link.download = data
         link.href = data
         link.click()
+    } else if (message.todo == "miniatureCanvas") {
+        let canvas = document.querySelectorAll("canvas")
+        chrome.runtime.sendMessage({x:canvas})
     }
 })
