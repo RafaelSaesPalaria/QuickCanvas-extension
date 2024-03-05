@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener(function (message) {
 
 function createMiniatures(message) {
     for (let i = 0 ; i < Object.keys(message.canvas).length; i++) {
-        let canvas =createCanvas()
+        let canvas =createCanvas(i)
         let c = canvas.getContext("2d")
         let img = new Image();
         img.onload = function() {
@@ -32,7 +32,7 @@ function createMiniatures(message) {
     }
 }
 
-function createCanvas() {
+function createCanvas(i) {
     let canvas = document.createElement("canvas");
     document.body.appendChild(canvas)
     canvas.width = 100
