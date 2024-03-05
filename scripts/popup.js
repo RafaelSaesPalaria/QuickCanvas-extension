@@ -26,7 +26,7 @@ chrome.runtime.onMessage.addListener(function (message) {
         };
         img.src = message.canvas[i]
         canvas.addEventListener("click",function () {
-        chrome.runtime.sendMessage({todo:"downloadCanvas"})
+        chrome.runtime.sendMessage({todo:"downloadCanvas",id:i})
         })
     }
 })

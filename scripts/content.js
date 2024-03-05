@@ -2,7 +2,7 @@
 
 chrome.runtime.onMessage.addListener(function name(message) {
     if (message.todo == "downloadCanvas") {
-        let canvas = document.querySelector("canvas")
+        let canvas = document.querySelectorAll("canvas")[message.id]
         let link = document.createElement("a")
         let data = canvas.toDataURL()
         link.download = data
