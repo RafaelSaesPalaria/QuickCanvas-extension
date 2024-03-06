@@ -1,11 +1,29 @@
-chrome.runtime.sendMessage({todo:"miniatureCanvas"})
+chrome.runtime.sendMessage({todo:"miniatureCanvas-All"})
+
+/* The Miniature appears when theres only one canvas?*/
+var oneMiniature = true
+var defaultValues = {
+    width: 150,
+    height: 150
+}
 
 chrome.runtime.onMessage.addListener(function (message) {
-    console.log(message.canvas)
-    if (Object.keys(message.canvas).length > 1) {
-        createMiniatures(message)
-    } else {
-        downloadCanvas(0)
+    console.log(message)
+    if (message.todo == "create") {
+        if (Object.keys(message.canvas).length > !oneMiniature) {
+            createMiniatures(message)
+        } else {
+            downloadCanvas(0)
+        }
+    } else if (message.todo == "edit") {
+        let canvas = document.querySelectorAll("canvas")[message.id]
+        let c = canvas.getContext("2d")
+        c.clearRect(0,0,canvas.width,canvas.height)
+        let img = new Image();
+        img.onload = function() {
+            c.drawImage(img, 0, 0, canvas.width, canvas.height);
+        };
+        img.src = message.canvas
     }
 })
 
@@ -32,13 +50,16 @@ function createMiniatures(message) {
     }
 }
 
-function createCanvas(i) {
+function createCanvas(id) {
     let canvas = document.createElement("canvas");
     document.body.appendChild(canvas)
-    canvas.width = 100
-    canvas.height= 100
+    canvas.width = defaultValues.width
+    canvas.height= defaultValues.height
     canvas.addEventListener("click",function () {
-        downloadCanvas(i)
+        downloadCanvas(id)
+    })
+    canvas.addEventListener("mouseover", function() {
+        chrome.runtime.sendMessage({todo:"miniatureCanvas","id":id})
     })
     return canvas
 }
