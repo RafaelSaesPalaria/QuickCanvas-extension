@@ -1,6 +1,7 @@
 chrome.runtime.sendMessage({todo:"miniatureCanvas-All"})
 
 /* The Miniature appears when theres only one canvas?*/
+var interval = 0
 var oneMiniature = true
 var defaultValues = {
     width: 150,
@@ -59,9 +60,13 @@ function createCanvas(id) {
         downloadCanvas(id)
     })
     canvas.addEventListener("mouseover", function() {
-        chrome.runtime.sendMessage({todo:"miniatureCanvas","id":id})
+        interval = setInterval(function () {miniatureCanvas(id)},100)
     })
     return canvas
+}
+
+function miniatureCanvas(id) {
+    chrome.runtime.sendMessage({todo:"miniatureCanvas","id":id})
 }
 
 function downloadCanvas(id) {
