@@ -19,9 +19,10 @@ chrome.runtime.onMessage.addListener(function (message) {
     } else if (message.todo == "edit") {
         let canvas = document.querySelectorAll("canvas")[message.id]
         let c = canvas.getContext("2d")
-        c.clearRect(0,0,canvas.width,canvas.height)
+        
         let img = new Image();
         img.onload = function() {
+            c.clearRect(0,0,canvas.width,canvas.height)
             c.drawImage(img, 0, 0, canvas.width, canvas.height);
         };
         img.src = message.canvas
@@ -60,6 +61,7 @@ function createCanvas(id) {
         downloadCanvas(id)
     })
     canvas.addEventListener("mouseover", function() {
+        clearInterval(interval)
         interval = setInterval(function () {miniatureCanvas(id)},100)
     })
     return canvas
