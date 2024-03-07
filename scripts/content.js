@@ -20,7 +20,24 @@ function downloadCanvas(id) {
 }
 
 function miniatureCanvas(id) {
-    let canvas = document.querySelectorAll("canvas")[id].toDataURL()
+    let canvas = document.querySelectorAll("canvas")[id]
+    let tmpCanvas = document.createElement("canvas")
+    tmpCanvas = Object.assign(tmpCanvas,canvas)
+
+    //RESIZE
+    if (canvas.height>canvas.width) {
+        let r = canvas.width/canvas.height
+        tmpCanvas.width = r*100
+        tmpCanvas.height= 100
+    } else {
+        let r = canvas.height/canvas.width
+        tmpCanvas.height =r*100
+        tmpCanvas.width = 100
+    }
+
+
+    tmpCanvas.getContext("2d").drawImage(canvas,0,0,tmpCanvas.width, tmpCanvas.height)
+    canvas = tmpCanvas.toDataURL()
     chrome.runtime.sendMessage({canvas,"todo":"edit","id":id})
 }
 
