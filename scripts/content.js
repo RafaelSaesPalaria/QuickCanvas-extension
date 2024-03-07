@@ -28,7 +28,23 @@ function miniatureCanvas_All() {
     let canvasd = document.querySelectorAll("canvas")
     let canvas = {}
     for (let i=0; i<canvasd.length;i++) {
-        canvas[i] = canvasd[i].toDataURL()
+        let tmpCanvas = document.createElement("canvas")
+        tmpCanvas = Object.assign(tmpCanvas,canvasd[i])
+
+        //RESIZE
+            if (canvasd[i].height>canvasd[i].width) {
+                let r = canvasd[i].width/canvasd[i].height
+                tmpCanvas.width = r*100
+                tmpCanvas.height= 100
+            } else {
+                let r = canvasd[i].height/canvasd[i].width
+                tmpCanvas.height =r*100
+                tmpCanvas.width = 100
+            }
+
+
+        tmpCanvas.getContext("2d").drawImage(canvasd[i],0,0,tmpCanvas.width, tmpCanvas.height)
+        canvas[i] = tmpCanvas.toDataURL()
     }
     chrome.runtime.sendMessage({canvas,"todo":"create"})
 }
