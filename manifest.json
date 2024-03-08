@@ -1,7 +1,7 @@
 {
     "manifest_version":3,
     "name":"Quick Canvas",
-    "version":"0.0.1",
+    "version":"0.3.4",
     "description":"Quick Solution for downloading a canvas",
     "author": {
         "email": "rafaelsaespalaria@gmail.com"
@@ -19,6 +19,10 @@
             "48":"icons/48.png",
             "16":"icons/16.png"
         }
+    },
+    "options_ui": {
+        "page":"pages/options.html",
+        "style":true
     },
     "content_scripts":[
         {
