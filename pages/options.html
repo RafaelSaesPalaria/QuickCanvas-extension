@@ -4,11 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Quick Canvas Options</title>
+        <link rel="stylesheet" href="options.css">
     </head>
     <body>
         <p>
-            <input type="submit" value="Apply [not">
-            <input type="reset" value="working] Reset">
+            <input type="submit" value="Apply [not" id="submit">
+            <input type="reset" value="working] Reset" id="reset">
         </p>
         <h1>Options - [WIP]</h1>
         <h2>Preview</h2>
@@ -22,31 +23,48 @@
             <input type="checkbox" id="preview-onecanvas">
         </p>
         <p>
-            <label for="preview-orientation">Preview orientation [WIP]</label>
-            <input type="radio" name="landscape" id="preview-orientation">
-            <input type="radio" name="portrait" id="preview-orientation">
+            <p>Preview Orientation</p>
+            <div class="sub">
+                <p>
+                    <label for="preview-orientation-landscape">Landscape</label>
+                    <input type="radio" name="landscape" id="preview-orientation-landscape">
+                </p>
+                <p>
+                    <label for="preview-orientation-portrait">Portrait</label>
+                    <input type="radio" name="portrait" id="preview-orientation-portrait">
+                </p>
+            </div>
         </p>
         <p>
-            <label for="preview-background">Preview background color</label>
-            <input type="color" id="preview-background-color">
-            <input type="button" value="Transparent" id="preview-background-transparent">
+            <label for="preview-background-transparent">
+                Preview background transparent
+            </label>
+            <input type="checkbox" value="Transparent" id="preview-background-transparent">
         </p>
+        <div class="sub">
+            <p>
+                <label for="preview-background">Preview background color</label>
+                <input type="color" id="preview-background-color">
+            </p>
+        </div>
 
         <hr>
 
         <h3>Preview Update</h3>
         <p>
             <label for="update">Update canvas</label>
-            <input type="checkbox" value="update">
+            <input type="checkbox" value="update" id="update">
         </p>
-        <p>
-            <label for="pdate-when">Update mouse when hovered</label>
-            <input type="radio" name="hovered" id="update-when">
-        </p>
-        <p>
-            <label for="update-when">Update always</label>
-            <input type="radio" name="always" id="update-when">
-        </p>
+        <div class="sub">
+            <p>
+                <label for="update-always">Update always</label>
+                <input type="radio" name="update-when" id="update-always">
+            </p>
+            <p>
+                <label for="pdate-hovered">Update mouse when hovered</label>
+                <input type="radio" name="update-when" id="update-hovered">
+            </p>
+        </div>
         <p>
             <label for="update-keep">Keep update after mouse leaves</label>
             <input type="checkbox" id="update-keep">
