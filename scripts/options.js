@@ -1,3 +1,5 @@
+import { storedData, chromeStorage } from "./storage.js"
+
 var components = {
     submit: document.querySelector('input[type="submit"]#submit'),
     reset: document.querySelector('input[type=reset]#reset'),
@@ -18,4 +20,14 @@ var components = {
     }
 }
 
-console.log(components)
+// LOAD
+chromeStorage().getByName(storedData.previewOnecanvas,function (value) {
+    components.preview.onecanvas.checked = value
+})
+
+// SAVE
+components.preview.onecanvas.addEventListener("change",function(event) {
+    chromeStorage().set(storedData.previewOnecanvas,event.target.checked)
+})
+
+//console.log(chromeStorage().getByName(storedData.previewOnecanvas))

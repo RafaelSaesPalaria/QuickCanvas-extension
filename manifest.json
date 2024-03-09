@@ -22,7 +22,8 @@
     },
     "options_ui": {
         "page":"pages/options.html",
-        "style":true
+        "style":true,
+        "type":"module"
     },
     "content_scripts":[
         {
@@ -35,5 +36,5 @@
         "type":"module",
         "persistant":false
     },
-    "permissions": ["tabs"]
+    "permissions": ["tabs","storage"]
 }
