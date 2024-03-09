@@ -24,11 +24,19 @@ init()
 function init() {
     checkbox(components.preview.onecanvas, storedData.previewOnecanvas)
     checkbox(components.preview.transparent, storedData.previewColor)
-    checkbox(components.update.update,storedData.updateCanvas)
     checkbox(components.update.keep, storedData.updateKeep)
+    checkbox(components.update.update,storedData.updateCanvas)
+    // TODO: update.update stored data when true shall do nothing
+    components.update.always.disabled =  components.update.update.checked
+    components.update.hovered.disabled= components.update.update.checked
     radio([components.preview.landscape, components.preview.portrait], storedData.previewOrientation)
     radio([components.update.always, components.update.hovered], storedData.updateCanvas)
 }
+
+components.update.update.addEventListener("change",function (event) {
+    components.update.always.disabled =  !event.target.checked
+    components.update.hovered.disabled= !event.target.checked
+})
 
 // SAVE AND LOAD
 function checkbox(component, storedName) {
