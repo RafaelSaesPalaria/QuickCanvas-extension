@@ -26,7 +26,8 @@ function init() {
     checkbox(components.preview.transparent, storedData.previewColor)
     checkbox(components.update.update,storedData.updateCanvas)
     checkbox(components.update.keep, storedData.updateKeep)
-    
+    radio([components.preview.landscape, components.preview.portrait], storedData.previewOrientation)
+    radio([components.update.always, components.update.hovered], storedData.updateCanvas)
 }
 
 // SAVE AND LOAD
@@ -35,7 +36,12 @@ function checkbox(component, storedName) {
     listen_checkBox(component, storedName)
 }
 
-
+function radio(components, storedName) {
+    load_radio(components, storedName)
+    for (let i = 0; i < Object.keys(components).length; i++) {
+        listen_radio(components[i], storedName)
+    }
+}
 
 // LOAD
 function load_checkBox(component, storedName) {
@@ -44,7 +50,13 @@ function load_checkBox(component, storedName) {
     })
 }
 
-
+function load_radio(components, storedName) {
+    chromeStorage().getByName(storedName, function (value) {
+        for (let i = 0; i < Object.keys(components).length; i++) {
+            components[i].checked = (value===components[i].id)
+        }
+    })
+}
 
 // SAVE
 function listen_checkBox(component, storedName) {
@@ -53,5 +65,11 @@ function listen_checkBox(component, storedName) {
     })
 }
 
-
+function listen_radio(component, storedName) {
+    component.addEventListener("change", function(event) {
+        if (event.target.checked) {
+            chromeStorage().set(storedName,component.id)
+        }
+    })
+}
 //console.log(chromeStorage().getByName(storedData.previewOnecanvas))
