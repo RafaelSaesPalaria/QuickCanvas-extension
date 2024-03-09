@@ -15,19 +15,43 @@ var components = {
         update: document.querySelector('input[type="checkbox"]#update'),
         always: document.querySelector('input[type="radio"]#update-always'),
         hovered: document.querySelector('input[type="radio"]#update-hovered'),
-        input: document.querySelector('input[type="checkbox"]#update-keep'),
+        keep: document.querySelector('input[type="checkbox"]#update-keep'),
         interval: document.querySelector('input[type="number"]#update-interval')
     }
 }
 
+init()
+function init() {
+    checkbox(components.preview.onecanvas, storedData.previewOnecanvas)
+    checkbox(components.preview.transparent, storedData.previewColor)
+    checkbox(components.update.update,storedData.updateCanvas)
+    checkbox(components.update.keep, storedData.updateKeep)
+    
+}
+
+// SAVE AND LOAD
+function checkbox(component, storedName) {
+    load_checkBox(component, storedName)
+    listen_checkBox(component, storedName)
+}
+
+
+
 // LOAD
-chromeStorage().getByName(storedData.previewOnecanvas,function (value) {
-    components.preview.onecanvas.checked = value
-})
+function load_checkBox(component, storedName) {
+    chromeStorage().getByName(storedName,function (value) {
+        component.checked = value
+    })
+}
+
+
 
 // SAVE
-components.preview.onecanvas.addEventListener("change",function(event) {
-    chromeStorage().set(storedData.previewOnecanvas,event.target.checked)
-})
+function listen_checkBox(component, storedName) {
+    component.addEventListener("change",function(event) {
+        chromeStorage().set(storedName,event.target.checked)
+    })
+}
+
 
 //console.log(chromeStorage().getByName(storedData.previewOnecanvas))
