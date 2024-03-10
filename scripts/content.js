@@ -38,7 +38,8 @@ function downloadCanvas(id) {
 
 function miniatureCanvas(id) {
     let canvas = document.querySelectorAll("canvas")[id]
-    let tmpCanvas = resizeTo(canvas, 150)
+    //TODO: change the resize value from 300 to the stored value
+    let tmpCanvas = resizeTo(canvas, 300)
 
     tmpCanvas.getContext("2d").drawImage(canvas,0,0,tmpCanvas.width, tmpCanvas.height)
     canvas = tmpCanvas.toDataURL()
@@ -49,7 +50,8 @@ function miniatureCanvas_All() {
     let canvasd = document.querySelectorAll("canvas")
     let canvas = {}
     for (let i=0; i<canvasd.length;i++) {
-        let tmpCanvas = resizeTo(canvasd[i],150)
+        //TODO: change the resize value from 300 to the stored value
+        let tmpCanvas = resizeTo(canvasd[i], 300)
 
         tmpCanvas.getContext("2d").drawImage(canvasd[i],0,0,tmpCanvas.width, tmpCanvas.height)
         canvas[i] = tmpCanvas.toDataURL()

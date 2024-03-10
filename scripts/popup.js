@@ -15,15 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { chromeStorage, storedData } from "./storage.js"
+
 chrome.runtime.sendMessage({todo:"miniatureCanvas-All"})
 
 /* The Miniature appears when theres only one canvas?*/
 var interval = 0
 var oneMiniature = true
-var defaultValues = {
-    width: 150,
-    height: 150
-}
 
 chrome.runtime.onMessage.addListener(function (message) {
     console.log(message)
@@ -72,8 +70,11 @@ function createMiniatures(message) {
 function createCanvas(id) {
     let canvas = document.createElement("canvas");
     document.body.appendChild(canvas)
-    canvas.width = defaultValues.width
-    canvas.height= defaultValues.height
+    //TODO verify if the is a value
+    chromeStorage().getByName(storedData.previewSize, function (value) {
+        canvas.width = value
+        canvas.height= value
+    })
     canvas.addEventListener("click",function () {
         downloadCanvas(id)
     })
