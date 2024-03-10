@@ -29,7 +29,6 @@ var components = {
         color: document.querySelector('input[type="color"]#preview-background-color'),
     },
     update: {
-        update: document.querySelector('input[type="checkbox"]#update'),
         always: document.querySelector('input[type="radio"]#update-always'),
         hovered: document.querySelector('input[type="radio"]#update-hovered'),
         keep: document.querySelector('input[type="checkbox"]#update-keep'),
@@ -42,18 +41,11 @@ function init() {
     checkbox(components.preview.onecanvas, storedData.previewOnecanvas)
     checkbox(components.preview.transparent, storedData.previewColor)
     checkbox(components.update.keep, storedData.updateKeep)
-    checkbox(components.update.update,storedData.updateCanvas)
+
     // TODO: update.update stored data when true shall do nothing
-    components.update.always.disabled =  components.update.update.checked
-    components.update.hovered.disabled= components.update.update.checked
     radio([components.preview.landscape, components.preview.portrait], storedData.previewOrientation)
     radio([components.update.always, components.update.hovered], storedData.updateCanvas)
 }
-
-components.update.update.addEventListener("change",function (event) {
-    components.update.always.disabled =  !event.target.checked
-    components.update.hovered.disabled= !event.target.checked
-})
 
 // SAVE AND LOAD
 function checkbox(component, storedName) {
@@ -83,6 +75,14 @@ function load_radio(components, storedName) {
     })
 }
 
+chromeStorage().getByName(storedData.previewSize,function (value) {
+    components.preview.size.value = value
+})
+
+chromeStorage().getByName(storedData.previewColor, function (value) {
+    components.preview.color.value = value
+})
+
 // SAVE
 function listen_checkBox(component, storedName) {
     component.addEventListener("change",function(event) {
@@ -97,4 +97,13 @@ function listen_radio(component, storedName) {
         }
     })
 }
+
+components.preview.color.addEventListener("change",function(event) {
+    chromeStorage().set(storedData.previewColor,event.target.value)
+})
+
+components.preview.size.addEventListener("change",function(event) {
+    chromeStorage().set(storedData.previewSize,event.target.value)
+})
+
 //console.log(chromeStorage().getByName(storedData.previewOnecanvas))
