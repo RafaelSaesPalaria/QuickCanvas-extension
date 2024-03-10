@@ -72,6 +72,9 @@ function createCanvas(id) {
     document.body.appendChild(canvas)
     //TODO verify if the is a value
     chromeStorage().getByName(storedData.previewSize, function (value) {
+        if (!value) {
+            value = 150
+        }
         canvas.width = value
         canvas.height= value
     })
