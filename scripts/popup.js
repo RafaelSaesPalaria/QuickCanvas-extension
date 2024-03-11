@@ -21,7 +21,11 @@ chrome.runtime.sendMessage({todo:"miniatureCanvas-All"})
 
 /* The Miniature appears when theres only one canvas?*/
 var interval = 0
+var intervalSpeed = 1000
 var oneMiniature = true;
+chromeStorage().getByName(storedData.updateInterval, function (value) {
+    intervalSpeed = value
+})
 chromeStorage().getByName(storedData.previewOnecanvas,function (value) {
     oneMiniature = value
 })
@@ -84,9 +88,15 @@ function createCanvas(id) {
     canvas.addEventListener("click",function () {
         downloadCanvas(id)
     })
-    canvas.addEventListener("mouseover", function() {
-        clearInterval(interval)
-        interval = setInterval(function () {miniatureCanvas(id)},100)
+    chromeStorage().getByName(storedData.updateCanvas,function (value) {
+        if (value == "update-always") {
+            interval = setInterval(function () {miniatureCanvas(id)},intervalSpeed)
+        } else {
+            canvas.addEventListener("mouseover", function() {
+                clearInterval(interval)
+                interval = setInterval(function () {miniatureCanvas(id)},intervalSpeed)
+            })
+        }
     })
     return canvas
 }
