@@ -96,6 +96,13 @@ function createCanvas(id) {
                 clearInterval(interval)
                 interval = setInterval(function () {miniatureCanvas(id)},intervalSpeed)
             })
+            chromeStorage().getByName(storedData.updateKeep, function (value) {
+                if (value != true) {
+                    canvas.addEventListener("mouseout", function() {
+                        clearInterval(interval)
+                    })
+                }
+            })
         }
     })
     return canvas
