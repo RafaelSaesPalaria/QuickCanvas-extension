@@ -83,6 +83,10 @@ chromeStorage().getByName(storedData.previewColor, function (value) {
     components.preview.color.value = value
 })
 
+chromeStorage().getByName(storedData.updateInterval, function (value) {
+    components.update.interval.value = value
+})
+
 // SAVE
 function listen_checkBox(component, storedName) {
     component.addEventListener("change",function(event) {
@@ -104,6 +108,10 @@ components.preview.color.addEventListener("change",function(event) {
 
 components.preview.size.addEventListener("change",function(event) {
     chromeStorage().set(storedData.previewSize,event.target.value)
+})
+
+components.update.interval.addEventListener("change",function(event) {
+    chromeStorage().set(storedData.updateInterval,event.target.value)
 })
 
 //console.log(chromeStorage().getByName(storedData.previewOnecanvas))
