@@ -17,6 +17,7 @@
 
 import { chromeStorage, storedData } from "./storage.js"
 
+//TODO/ERROR: when popup is open by the second time the canvas doesnt download as fast
 chrome.runtime.sendMessage({todo:"miniatureCanvas-All"})
 
 /* The Miniature appears when theres only one canvas?*/
@@ -24,7 +25,9 @@ var interval = 0
 var intervalSpeed = 1000
 var oneMiniature = true;
 chromeStorage().getByName(storedData.updateInterval, function (value) {
-    intervalSpeed = value
+    if (value) {
+        intervalSpeed = value
+    }
 })
 chromeStorage().getByName(storedData.previewOnecanvas,function (value) {
     oneMiniature = value
@@ -34,6 +37,7 @@ chrome.runtime.onMessage.addListener(function (message) {
     console.log(message)
     if (message.todo == "create") {
         if (Object.keys(message.canvas).length > !oneMiniature) {
+            //TODO: pass the miniatures desired size in the createMiniatures and in the miniatureCanvas
             createMiniatures(message)
         } else {
             downloadCanvas(0)
@@ -77,6 +81,17 @@ function createMiniatures(message) {
 function createCanvas(id) {
     let canvas = document.createElement("canvas");
     document.body.appendChild(canvas)
+
+    chromeStorage().getByName(storedData.previewColor, function (value) {
+        if (value!=true) {
+            canvas.style.backgroundColor = value
+        } else {
+            //canvas.style.backgroundColor = "transparent"
+            //document.body.style.backgroundColor = "transparent"
+        }
+    })
+
+
     //TODO verify if the is a value
     chromeStorage().getByName(storedData.previewSize, function (value) {
         if (!value) {
