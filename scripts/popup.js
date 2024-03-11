@@ -21,7 +21,10 @@ chrome.runtime.sendMessage({todo:"miniatureCanvas-All"})
 
 /* The Miniature appears when theres only one canvas?*/
 var interval = 0
-var oneMiniature = true
+var oneMiniature = true;
+chromeStorage().getByName(storedData.previewOnecanvas,function (value) {
+    oneMiniature = value
+})
 
 chrome.runtime.onMessage.addListener(function (message) {
     console.log(message)
