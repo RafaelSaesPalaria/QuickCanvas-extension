@@ -43,8 +43,8 @@ function init() {
     checkbox(components.update.keep, storedData.updateKeep)
 
     // TODO: update.update stored data when true shall do nothing
-    radio([components.preview.landscape, components.preview.portrait], storedData.previewOrientation)
-    radio([components.update.always, components.update.hovered], storedData.updateCanvas)
+    radio([ components.preview.portrait ,components.preview.landscape], storedData.previewOrientation)
+    radio([components.update.hovered, components.update.always], storedData.updateCanvas)
 }
 
 // SAVE AND LOAD
@@ -69,8 +69,12 @@ function load_checkBox(component, storedName) {
 
 function load_radio(components, storedName) {
     chromeStorage().getByName(storedName, function (value) {
-        for (let i = 0; i < Object.keys(components).length; i++) {
-            components[i].checked = (value===components[i].id)
+        if (value) {
+            for (let i = 0; i < Object.keys(components).length; i++) {
+                components[i].checked = (value===components[i].id)
+            }
+        } else { // If theres no value the component 1 is checked
+            components[0].checked = true
         }
     })
 }
@@ -80,7 +84,11 @@ chromeStorage().getByName(storedData.previewSize,function (value) {
 })
 
 chromeStorage().getByName(storedData.previewColor, function (value) {
-    components.preview.color.value = value
+    if (value) {
+        components.preview.color.value = value
+    } else {
+        components.preview.color.value = "rgb(255,255,255)"
+    }
 })
 
 chromeStorage().getByName(storedData.updateInterval, function (value) {
