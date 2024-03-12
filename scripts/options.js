@@ -80,7 +80,11 @@ function load_radio(components, storedName) {
 }
 
 chromeStorage().getByName(storedData.previewSize,function (value) {
+    if (value) {
     components.preview.size.value = value
+    }  else {
+        components.preview.size.value = 150
+    }
 })
 
 chromeStorage().getByName(storedData.previewColor, function (value) {
