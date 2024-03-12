@@ -16,13 +16,17 @@
  */
 
 export var storedData = {
-    previewSize: "previewSize",
-    previewOnecanvas: "previewOnecanvas",
-    previewOrientation: "previewOrientation",
-    previewColor: "previewColor",
-    updateCanvas: "updateCanvas",
-    updateKeep: "updateKeep",
-    updateInterval: "updateInterval"
+  preview:{
+    size: "previewSize",
+    onecanvas: "previewOnecanvas",
+    orientationC: "previewOrientation",
+    color: "previewColor",
+  },
+  update: {
+    canvas: "updateCanvas",
+    keep: "updateKeep",
+    interval: "updateInterval"
+  }
 }
 
 export function chromeStorage() {

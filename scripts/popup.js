@@ -17,23 +17,36 @@
 
 import { chromeStorage, storedData } from "./storage.js"
 
-//TODO/ERROR: when popup is open by the second time the canvas doesnt download as fast
-chromeStorage().getByName(storedData.previewSize, function(value) {
-    chrome.runtime.sendMessage({todo:"miniatureCanvas-All",size:value})
+var data = {
+    preview: {
+        size: 150,
+        onecanvas: true,
+        orientationC: "portrait",
+        color: "rgb(255,255,255)"
+    },
+    update: {
+        canvas: "update-hovered",
+        keep: true,
+        interval: 1000
+    }
+}
+
+chromeStorage().getAll(function (callback) {
+    data.preview.size = callback[storedData.preview.size]
+    data.preview.onecanvas = callback[storedData.preview.onecanvas]
+    data.preview.orientationC=callback[storedData.preview.orientationC]
+    data.preview.color = callback[storedData.preview.color]
+    data.update.canvas = callback[storedData.update.canvas]
+    data.update.keep = callback[storedData.update.keep]
+    data.update.interval = callback[storedData.update.interval]
 })
+
+//TODO/ERROR: when popup is open by the second time the canvas doesnt download as fast
+chrome.runtime.sendMessage({todo:"miniatureCanvas-All",size:data.preview.size})
 
 /* The Miniature appears when theres only one canvas?*/
 var interval = 0
-var intervalSpeed = 1000
-var oneMiniature = true;
-chromeStorage().getByName(storedData.updateInterval, function (value) {
-    if (value) {
-        intervalSpeed = value
-    }
-})
-chromeStorage().getByName(storedData.previewOnecanvas,function (value) {
-    oneMiniature = value
-})
+var oneMiniature = data.preview.onecanvas;
 
 chrome.runtime.onMessage.addListener(function (message) {
     console.log(message)
@@ -83,52 +96,32 @@ function createMiniatures(message) {
 function createCanvas(id) {
     let canvas = document.createElement("canvas");
     document.body.appendChild(canvas)
+    canvas.style.backgroundColor = data.preview.color
 
-    chromeStorage().getByName(storedData.previewColor, function (value) {
-        if (value!=true) {
-            canvas.style.backgroundColor = value
-        } else {
-            //canvas.style.backgroundColor = "transparent"
-            //document.body.style.backgroundColor = "transparent"
-        }
-    })
+    canvas.width = data.preview.size
+    canvas.height= data.preview.size
 
-
-    //TODO verify if the is a value
-    chromeStorage().getByName(storedData.previewSize, function (value) {
-        if (!value) {
-            value = 150
-        }
-        canvas.width = value
-        canvas.height= value
-    })
     canvas.addEventListener("click",function () {
         downloadCanvas(id)
     })
-    chromeStorage().getByName(storedData.updateCanvas,function (value) {
-        if (value == "update-always") {
-            interval = setInterval(function () {miniatureCanvas(id)},intervalSpeed)
-        } else {
-            canvas.addEventListener("mouseover", function() {
+    if (data.update.canvas == "update-always") {
+        interval = setInterval(function () {miniatureCanvas(id)},data.update.interval)
+    } else {
+        canvas.addEventListener("mouseover", function() {
+            clearInterval(interval)
+            interval = setInterval(function () {miniatureCanvas(id)},data.update.interval)
+        })
+        if (data.update.keep != true) {
+            canvas.addEventListener("mouseout", function() {
                 clearInterval(interval)
-                interval = setInterval(function () {miniatureCanvas(id)},intervalSpeed)
-            })
-            chromeStorage().getByName(storedData.updateKeep, function (value) {
-                if (value != true) {
-                    canvas.addEventListener("mouseout", function() {
-                        clearInterval(interval)
-                    })
-                }
             })
         }
-    })
+    }
     return canvas
 }
 
 function miniatureCanvas(id) {
-    chromeStorage().getByName(storedData.previewSize, function(value) {
-        chrome.runtime.sendMessage({todo:"miniatureCanvas","id":id,"size":value})
-    })
+        chrome.runtime.sendMessage({todo:"miniatureCanvas","id":id,"size":data.preview.size})
 }
 
 function downloadCanvas(id) {
