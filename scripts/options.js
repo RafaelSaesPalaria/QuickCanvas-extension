@@ -102,6 +102,7 @@ chromeStorage().getByName(storedData.update.interval, function (value) {
 // SAVE
 function listen_checkBox(component, storedName) {
     component.addEventListener("change",function(event) {
+        showSaved(component)
         chromeStorage().set(storedName,event.target.checked)
     })
 }
@@ -109,21 +110,37 @@ function listen_checkBox(component, storedName) {
 function listen_radio(component, storedName) {
     component.addEventListener("change", function(event) {
         if (event.target.checked) {
+            showSaved(component)
             chromeStorage().set(storedName,component.id)
         }
     })
 }
 
 components.preview.color.addEventListener("change",function(event) {
+    showSaved(components.preview.color)
     chromeStorage().set(storedData.preview.color,event.target.value)
 })
 
 components.preview.size.addEventListener("change",function(event) {
+    showSaved(components.preview.size)
     chromeStorage().set(storedData.preview.size,event.target.value)
 })
 
 components.update.interval.addEventListener("change",function(event) {
+    showSaved(components.update.interval)
     chromeStorage().set(storedData.update.interval,event.target.value)
 })
+
+function showSaved(component) {
+    let d = document.createElement("span")
+    d.style.color = "green"
+    d.style.display = "inline"
+    d.innerText = "saved"
+    component.parentNode.appendChild(d);
+    
+    setTimeout( function() {
+        d.remove()
+    },300)
+}
 
 //console.log(chromeStorage().getByName(storedData.previewOnecanvas))
