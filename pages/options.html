@@ -11,27 +11,27 @@
             <input type="submit" value="Apply" id="submit" style="display: none;">
             <input type="reset" value="Reset" id="reset" style="display: none;">
         </p>
-        <h1>Options - [WIP]</h1>
+        <h1>Opções - [WIP]</h1>
         <hr>
-        <h2>Preview</h2>
+        <h2>Prévia</h2>
 
         <p>
-            <label for="preview-size">Preview Size</label>
+            <label for="preview-size">Tamanho da prévia</label>
             <input type="range" id="preview-size" min="10" max="300">
         </p>
         <p>
-            <label for="preview-onecanvas">Preview with one canvas</label>
+            <label for="preview-onecanvas">prévia com só um canvas</label>
             <input type="checkbox" id="preview-onecanvas">
         </p>
         <p>
-            <p>Preview Orientation [WIP]</p>
+            <p>Orientação da prévia [WIP]</p>
             <div class="sub">
                 <p>
-                    <label for="preview-orientation-landscape">Landscape</label>
+                    <label for="preview-orientation-landscape">Paisagem</label>
                     <input type="radio" name="orientation" id="preview-orientation-landscape">
                 </p>
                 <p>
-                    <label for="preview-orientation-portrait">Portrait</label>
+                    <label for="preview-orientation-portrait">Retrato</label>
                     <input type="radio" name="orientation" id="preview-orientation-portrait">
                 </p>
             </div>
@@ -44,33 +44,33 @@
         </p>
         <div class="sub">
             <p>
-                <label for="preview-background">Preview background color</label>
+                <label for="preview-background">Cor de fundo da prévia</label>
                 <input type="color" id="preview-background-color">
             </p>
         </div>
 
         <hr>
 
-        <h3>Preview Update</h3>
+        <h3>Atualizações da prévia</h3>
         <p>
-            <p>Update canvas</p>
+            <p>Atualizar prévia</p>
         </p>
         <div class="sub">
             <p>
-                <label for="update-always">Update always</label>
+                <label for="update-always">Sempre</label>
                 <input type="radio" name="update-when" id="update-always">
             </p>
             <p>
-                <label for="pdate-hovered">Update mouse when hovered</label>
+                <label for="pdate-hovered">Quando passa o mouse por cima</label>
                 <input type="radio" name="update-when" id="update-hovered">
             </p>
         </div>
         <p>
-            <label for="update-keep">Keep update after mouse leaves</label>
+            <label for="update-keep">Mantenha atualizando depois de passar o mouse por cima</label>
             <input type="checkbox" id="update-keep">
         </p>
         <p>
-            <label for="update-interval">Canvas update interval</label>
+            <label for="update-interval">Intervalo de atualizações do canvas (ms)</label>
             <input type="number" id="update-interval" min="1" max="10000" placeholder="1000">
         </p>
         <script type="module" src="../scripts/options.js"></script>
