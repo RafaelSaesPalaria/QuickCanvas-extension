@@ -32,14 +32,18 @@ var data = {
 }
 
 chromeStorage().getAll(function (callback) {
-    data.preview.size = callback[storedData.preview.size]
-    data.preview.onecanvas = callback[storedData.preview.onecanvas]
-    data.preview.orientationC=callback[storedData.preview.orientationC]
-    data.preview.color = callback[storedData.preview.color]
-    data.update.canvas = callback[storedData.update.canvas]
-    data.update.keep = callback[storedData.update.keep]
-    data.update.interval = callback[storedData.update.interval]
+    applyCallbackToData(callback)
 })
+
+function applyCallbackToData(callback) {
+    for (let key0 in data) {
+        for (let key1 in data[key0]) {
+            if (callback[storedData[key0][key1]]) {
+                data[key0][key1] = callback[storedData[key0][key1]]
+            }
+        }
+    }
+}
 
 //TODO/ERROR: when popup is open by the second time the canvas doesnt download as fast
 chrome.runtime.sendMessage({todo:"miniatureCanvas-All",size:data.preview.size})
