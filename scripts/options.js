@@ -45,6 +45,10 @@ function init() {
     // TODO: update.update stored data when true shall do nothing
     radio([ components.preview.portrait ,components.preview.landscape], storedData.preview.orientationC)
     radio([components.update.hovered, components.update.always], storedData.update.canvas)
+
+    listen_other(components.preview.color, storedData.preview.color)
+    listen_other(components.preview.size, storedData.preview.size)
+    listen_other(components.update.interval, storedData.preview.interval)
 }
 
 // SAVE AND LOAD
@@ -116,20 +120,12 @@ function listen_radio(component, storedName) {
     })
 }
 
-components.preview.color.addEventListener("change",function(event) {
-    showSaved(components.preview.color)
-    chromeStorage().set(storedData.preview.color,event.target.value)
-})
-
-components.preview.size.addEventListener("change",function(event) {
-    showSaved(components.preview.size)
-    chromeStorage().set(storedData.preview.size,event.target.value)
-})
-
-components.update.interval.addEventListener("change",function(event) {
-    showSaved(components.update.interval)
-    chromeStorage().set(storedData.update.interval,event.target.value)
-})
+function listen_other(component, storedName) {
+    component.addEventListener("change",function(event) {
+        showSaved(component)
+        chromeStorage().set(storedName,event.target.value)
+    })
+}
 
 function showSaved(component) {
     let d = document.createElement("span")
@@ -137,7 +133,7 @@ function showSaved(component) {
     d.style.display = "inline"
     d.innerText = "saved"
     component.parentNode.appendChild(d);
-    
+
     setTimeout( function() {
         d.remove()
     },300)
