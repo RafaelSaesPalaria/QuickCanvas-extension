@@ -1,7 +1,7 @@
 {
     "manifest_version":3,
     "name":"Quick Canvas",
-    "version":"0.4.0",
+    "version":"0.4.1",
     "description":"Uma solução rapida para baixar canvas",
     "author": {
         "email": "rafaelsaespalaria@gmail.com"
@@ -36,5 +36,5 @@
         "type":"module",
         "persistant":false
     },
-    "permissions": ["tabs","storage"]
+    "permissions": ["activeTab","storage"]
 }
