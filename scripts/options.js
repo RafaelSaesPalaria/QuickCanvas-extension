@@ -48,7 +48,7 @@ function init() {
 
     listen_other(components.preview.color, storedData.preview.color)
     listen_other(components.preview.size, storedData.preview.size)
-    listen_other(components.update.interval, storedData.preview.interval)
+    listen_other(components.update.interval, storedData.update.interval)
 }
 
 // SAVE AND LOAD
@@ -126,7 +126,7 @@ function listen_other(component, storedName) {
         showSaved(component)
         chromeStorage().set(storedName,event.target.value)
     })
-}
+}   
 
 function showSize() {
     let c = document.createElement("canvas")
