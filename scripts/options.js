@@ -17,7 +17,7 @@
 
 import { storedData, chromeStorage } from "./storage.js"
 
-var components = {
+var components   = {
     submit: document.querySelector('input[type="submit"]#submit'),
     reset: document.querySelector('input[type=reset]#reset'),
     preview: {
@@ -122,9 +122,22 @@ function listen_radio(component, storedName) {
 
 function listen_other(component, storedName) {
     component.addEventListener("change",function(event) {
+        if (component === components.preview.size) { showSize() }
         showSaved(component)
         chromeStorage().set(storedName,event.target.value)
     })
+}
+
+function showSize() {
+    let c = document.createElement("canvas")
+    c.width = components.preview.size.value
+    c.height= components.preview.size.value
+    components.preview.size.parentNode.appendChild(c);
+    c.style.position = "absolute"
+    c.style.display = "float"
+    setTimeout( function() {
+        c.remove()
+    },300)
 }
 
 function showSaved(component) {
