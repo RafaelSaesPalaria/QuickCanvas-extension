@@ -44,6 +44,16 @@ function applyCallbackToData(callback) {
         }
     }
 }
+applyLanguage("pt-br")
+function applyLanguage(language) {
+    fetch(`../languages/${language}.json`).then(response => response.json()).then(translation => {
+        console.log(translation)
+    })
+}
+
+
+
+
 
 //TODO/ERROR: when popup is open by the second time the canvas doesnt download as fast
 chrome.runtime.sendMessage({todo:"miniatureCanvas-All",size:data.preview.size})
