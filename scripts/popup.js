@@ -47,7 +47,11 @@ function applyCallbackToData(callback) {
 applyLanguage("pt-br")
 function applyLanguage(language) {
     fetch(`../languages/${language}.json`).then(response => response.json()).then(translation => {
-        console.log(translation)
+        for (let t in translation) {
+            if (document.querySelector(`#${t}`)) {
+                document.querySelector(`#${t}`).innerText = `${translation[t]}`
+            }
+        }
     })
 }
 

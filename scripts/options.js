@@ -36,6 +36,17 @@ var components   = {
     }
 }
 
+applyLanguage("pt-br")
+function applyLanguage(language) {
+    fetch(`../languages/${language}.json`).then(response => response.json()).then(translation => {
+        for (let t in translation) {
+            if (document.querySelector(`#${t}`)) {
+                document.querySelector(`#${t}`).innerText = `${translation[t]}`
+            }
+        }
+    })
+}   
+
 init()
 function init() {
     checkbox(components.preview.onecanvas, storedData.preview.onecanvas)
