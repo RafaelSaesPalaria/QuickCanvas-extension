@@ -144,7 +144,7 @@ function showSaved(component) {
     let d = document.createElement("span")
     d.style.color = "green"
     d.style.display = "inline"
-    d.innerText = "saved"
+    d.innerText = "salvo"
     component.parentNode.appendChild(d);
 
     setTimeout( function() {
