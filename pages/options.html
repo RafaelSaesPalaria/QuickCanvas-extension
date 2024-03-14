@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title id="title">Quick Canvas - Opções</title>
+        <title id="title"></title>
         <link rel="stylesheet" href="options.css">
     </head>
     <body>
@@ -11,66 +11,65 @@
             <input type="submit" value="Apply" id="submit" style="display: none;">
             <input type="reset" value="Reset" id="reset" style="display: none;">
         </p>
-        <h1 id="options">Opções - [WIP]</h1>
+        <h1 id="options"></h1>
         <hr>
-        <h2 id="preview">Prévia</h2>
+        <h2 id="preview"></h2>
 
         <p>
-            <label for="preview-size" id="preview-size">Tamanho da prévia</label>
+            <label for="preview-size" id="preview-size"></label>
             <input type="range" id="preview-size" min="10" max="300">
         </p>
         <p>
-            <label for="preview-onecanvas" id="preview-onecanvas">prévia com só um canvas</label>
+            <label for="preview-onecanvas" id="preview-onecanvas"></label>
             <input type="checkbox" id="preview-onecanvas">
         </p>
         <p>
-            <p style="display:none;" id="preview-orientation">Orientação da prévia [WIP]</p>
+            <p style="display:none;" id="preview-orientation"></p>
             <div class="sub">
                 <p>
-                    <label style="display:none;" for="preview-orientation-landscape" id="landscape">Paisagem</label>
+                    <label style="display:none;" for="preview-orientation-landscape" id="landscape"></label>
                     <input style="display:none;" type="radio" name="orientation" id="preview-orientation-landscape">
                 </p>
                 <p>
-                    <label style="display:none;" for="preview-orientation-portrait" id="portrait">Retrato</label>
+                    <label style="display:none;" for="preview-orientation-portrait" id="portrait"></label>
                     <input style="display:none;" type="radio" name="orientation" id="preview-orientation-portrait">
                 </p>
             </div>
         </p>
         <p>
             <label for="preview-background-transparent" style="display: none;" id="preview-transparent">
-                Preview background transparent [TRANSPARENT WIP]
             </label>
             <input type="checkbox" value="Transparent" id="preview-background-transparent" style="display: none;">
         </p>
         <div class="sub">
             <p>
-                <label for="preview-background" id="preview-background">Cor de fundo da prévia</label>
+                <label for="preview-background" id="preview-background"></label>
                 <input type="color" id="preview-background-color">
             </p>
         </div>
 
         <hr>
 
-        <h3 id="preview-update">Atualizações da prévia</h3>
+        <h3 id="preview-update"></h3>
         <p>
-            <p id="update">Atualizar prévia</p>
+            <p id="update"></p>
         </p>
         <div class="sub">
             <p>
-                <label for="update-always" id="always">Sempre</label>
+                <label for="update-always" id="always"></label>
                 <input type="radio" name="update-when" id="update-always">
             </p>
             <p>
-                <label for="pdate-hovered" id="hovered">Quando passa o mouse por cima</label>
+                <label for="pdate-hovered" id="hovered"></label>
                 <input type="radio" name="update-when" id="update-hovered">
             </p>
         </div>
         <p>
-            <label for="update-keep" id="keep">Mantenha atualizando depois de passar o mouse por cima</label>
+            <label for="update-keep" id="keep"></label>
             <input type="checkbox" id="update-keep">
         </p>
         <p>
-            <label for="update-interval" id="interval">Intervalo de atualizações do canvas (ms)</label>
+            <label for="update-interval" id="interval"></label>
             <input type="number" id="update-interval" min="1" max="10000" placeholder="1000">
         </p>
         <script type="module" src="../scripts/options.js"></script>

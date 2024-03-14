@@ -36,7 +36,7 @@ var components   = {
     }
 }
 
-applyLanguage("pt-br")
+applyLanguage(navigator.language || navigator.userLanguage)
 function applyLanguage(language) {
     fetch(`../languages/${language}.json`).then(response => response.json()).then(translation => {
         for (let t in translation) {
@@ -44,6 +44,9 @@ function applyLanguage(language) {
                 document.querySelector(`#${t}`).innerText = `${translation[t]}`
             }
         }
+    }).catch(error => { // Detect a language that is not there 
+        console.log("Language not avaliable, changing to en")
+        applyLanguage("en")
     })
 }   
 
@@ -106,7 +109,7 @@ chromeStorage().getByName(storedData.preview.color, function (value) {
     if (value) {
         components.preview.color.value = value
     } else {
-        components.preview.color.value = "rgb(255,255,255)"
+        components.preview.color.value = "#ffffff"
     }
 })
 
@@ -155,6 +158,7 @@ function showSaved(component) {
     let d = document.createElement("span")
     d.style.color = "green"
     d.style.display = "inline"
+    //TODO change save language
     d.innerText = "salvo"
     component.parentNode.appendChild(d);
 

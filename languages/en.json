@@ -1,19 +1,19 @@
 {
-"title":"a",
-"options":"a",
-"preview":"a",
-"preview-size":"a",
-"preview-onecanvas":"a",
-"preview-orientation":"a",
-"landscape":"a",
-"portrait":"a",
-"preview-transparent":"a",
-"preview-background":"a",
-
-"preview-update":"a",
-"update":"a",
-"always":"a",
-"hovered":"a",
-"keep":"a",
-"interval":"a"
-}
+    "title":"Quick Canvas",
+    "options":"Options - [WIP]",
+    "preview":"Preview",
+    "preview-size":"Preview Size",
+    "preview-onecanvas":"Show preview with only one canvas",
+    "preview-orientation":"Preview Orientation [WIP]",
+    "landscape":"Lanscape",
+    "portrait":"Portrait",
+    "preview-transparent":"Preview Background Transparent [Transparent WIP]",
+    "preview-background":"Preview Background",
+    
+    "preview-update":"Preview Update",
+    "update":"Update",
+    "always":"Always",
+    "hovered":"When the mouse hovers",
+    "keep":"Keep updating after mouse hover",
+    "interval":"Update interval (ms)"
+    }
