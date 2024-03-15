@@ -73,35 +73,47 @@ function applyCallbackToData(callback) {
     for (let key0 in data) {
         for (let key1 in data[key0]) {
 
-            if (callback[storedData[key0][key1]]) {
+            if (components[key0][key1]) {
 
+                //Loading
                 if (components[key0][key1].type == "checkbox") {
                     components[key0][key1].checked = callback[storedData[key0][key1]]
                 } else if (components[key0][key1].type != "radio") {
                     components[key0][key1].value = callback[storedData[key0][key1]]
-                } else {
-                    console.log("Load radio not programmed yet")
                 }
             }
 
+            //Listening
             if (storedData[key0][key1]) { 
                 applyOnChange(components[key0][key1],storedData[key0][key1])
             }
 
         }
     }
+    if (callback[storedData.preview.orientationC]) {
+    document.querySelector(`#${callback[storedData.preview.orientationC]}`).checked = true
+    }
+    if (callback[storedData.update.canvas]) {
+        document.querySelector(`#${callback[storedData.update.canvas]}`).checked=true
+    }
+    applyOnChange(components.preview.landscape,storedData.preview.orientationC)
+    applyOnChange(components.preview.portrait,storedData.preview.orientationC)
+    applyOnChange(components.update.always,storedData.update.canvas)
+    applyOnChange(components.update.hovered,storedData.update.canvas)
 }
 
 function applyOnChange(component,storedName) {
+    console.log(component)
     if (component) {
         component.addEventListener("change",function (event) {
+            console.log(event)
             //showSaved()
             if (component.type == "checkbox") {
                 chromeStorage().set(storedName,event.target.checked)
             } else if (component.type != "radio") {
                 chromeStorage().set(storedName,event.target.value)
             } else {
-                console.log("Cannot apply change of radio yet")
+                chromeStorage().set(storedName,event.target.id)
             }
         })
     }
