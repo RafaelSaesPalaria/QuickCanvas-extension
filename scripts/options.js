@@ -50,97 +50,35 @@ function applyLanguage(language) {
     })
 }   
 
-init()
-function init() {
-    checkbox(components.preview.onecanvas, storedData.preview.onecanvas)
-    checkbox(components.preview.transparent, storedData.preview.color)
-    checkbox(components.update.keep, storedData.update.keep)
 
-    // TODO: update.update stored data when true shall do nothing
-    radio([ components.preview.portrait ,components.preview.landscape], storedData.preview.orientationC)
-    radio([components.update.hovered, components.update.always], storedData.update.canvas)
-
-    listen_other(components.preview.color, storedData.preview.color)
-    listen_other(components.preview.size, storedData.preview.size)
-    listen_other(components.update.interval, storedData.update.interval)
-}
-
-// SAVE AND LOAD
-function checkbox(component, storedName) {
-    load_checkBox(component, storedName)
-    listen_checkBox(component, storedName)
-}
-
-function radio(components, storedName) {
-    load_radio(components, storedName)
-    for (let i = 0; i < Object.keys(components).length; i++) {
-        listen_radio(components[i], storedName)
+var data = {
+    preview: {
+        size: 150,
+        onecanvas: true,
+        orientationC: "portrait",
+        color: "rgb(255,255,255)"
+    },
+    update: {
+        canvas: "update-hovered",
+        keep: true,
+        interval: 1000
     }
 }
 
-// LOAD
-function load_checkBox(component, storedName) {
-    chromeStorage().getByName(storedName,function (value) {
-        component.checked = value
-    })
-}
+chromeStorage().getAll(function (callback) {
+    applyCallbackToData(callback)
+})
 
-function load_radio(components, storedName) {
-    chromeStorage().getByName(storedName, function (value) {
-        if (value) {
-            for (let i = 0; i < Object.keys(components).length; i++) {
-                components[i].checked = (value===components[i].id)
+function applyCallbackToData(callback) {
+    for (let key0 in data) {
+        for (let key1 in data[key0]) {
+
+            if (callback[storedData[key0][key1]]) {
+                components[key0][key1].value = callback[storedData[key0][key1]]
             }
-        } else { // If theres no value the component 1 is checked
-            components[0].checked = true
         }
-    })
-}
-
-chromeStorage().getByName(storedData.preview.size,function (value) {
-    if (value) {
-    components.preview.size.value = value
-    }  else {
-        components.preview.size.value = 150
     }
-})
-
-chromeStorage().getByName(storedData.preview.color, function (value) {
-    if (value) {
-        components.preview.color.value = value
-    } else {
-        components.preview.color.value = "#ffffff"
-    }
-})
-
-chromeStorage().getByName(storedData.update.interval, function (value) {
-    components.update.interval.value = value
-})
-
-// SAVE
-function listen_checkBox(component, storedName) {
-    component.addEventListener("change",function(event) {
-        showSaved(component)
-        chromeStorage().set(storedName,event.target.checked)
-    })
 }
-
-function listen_radio(component, storedName) {
-    component.addEventListener("change", function(event) {
-        if (event.target.checked) {
-            showSaved(component)
-            chromeStorage().set(storedName,component.id)
-        }
-    })
-}
-
-function listen_other(component, storedName) {
-    component.addEventListener("change",function(event) {
-        if (component === components.preview.size) { showSize() }
-        showSaved(component)
-        chromeStorage().set(storedName,event.target.value)
-    })
-}   
 
 function showSize() {
     let c = document.createElement("canvas")
