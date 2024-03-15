@@ -92,14 +92,15 @@ function applyCallbackToData(callback) {
 }
 
 function applyOnChange(component,storedName) {
-    console.log(component)
     if (component) {
         component.addEventListener("change",function (event) {
-            console.log(event)
-            //showSaved()
+            showSaved(component)
             if (component.type == "checkbox") {
                 chromeStorage().set(storedName,event.target.checked)
             } else if (component.type != "radio") {
+                if (component.type == "range") {
+                    showSize()
+                }
                 chromeStorage().set(storedName,event.target.value)
             } else {
                 chromeStorage().set(storedName,event.target.id)
@@ -126,6 +127,7 @@ function showSaved(component) {
     d.style.display = "inline"
     //TODO change save language
     d.innerText = "salvo"
+    console.log(component)
     component.parentNode.appendChild(d);
 
     setTimeout( function() {
