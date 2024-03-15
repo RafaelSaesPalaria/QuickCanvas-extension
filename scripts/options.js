@@ -74,9 +74,36 @@ function applyCallbackToData(callback) {
         for (let key1 in data[key0]) {
 
             if (callback[storedData[key0][key1]]) {
-                components[key0][key1].value = callback[storedData[key0][key1]]
+
+                if (components[key0][key1].type == "checkbox") {
+                    components[key0][key1].checked = callback[storedData[key0][key1]]
+                } else if (components[key0][key1].type != "radio") {
+                    components[key0][key1].value = callback[storedData[key0][key1]]
+                } else {
+                    console.log("Load radio not programmed yet")
+                }
             }
+
+            if (storedData[key0][key1]) { 
+                applyOnChange(components[key0][key1],storedData[key0][key1])
+            }
+
         }
+    }
+}
+
+function applyOnChange(component,storedName) {
+    if (component) {
+        component.addEventListener("change",function (event) {
+            //showSaved()
+            if (component.type == "checkbox") {
+                chromeStorage().set(storedName,event.target.checked)
+            } else if (component.type != "radio") {
+                chromeStorage().set(storedName,event.target.value)
+            } else {
+                console.log("Cannot apply change of radio yet")
+            }
+        })
     }
 }
 
