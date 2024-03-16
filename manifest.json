@@ -2,7 +2,8 @@
     "manifest_version":3,
     "name":"Quick Canvas",
     "version":"0.4.3",
-    "description":"Uma solução rapida para baixar canvas",
+    "default_locale": "en",
+    "description":"__MSG_description__",
     "author": {
         "email": "rafaelsaespalaria@gmail.com"
     },
@@ -12,7 +13,7 @@
         "16":"icons/16.png"
     },
     "action": {
-        "default_title":"Quick Canvas",
+        "default_title":"__MSG_title__",
         "default_popup":"pages/popup.html",
         "default_icon":{
             "128":"icons/128.png",

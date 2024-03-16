@@ -1,0 +1,69 @@
+{
+    "description": {
+        "message":"A quick solution to downloading canvas",
+        "description":"Extension description"
+    },
+    "title":{
+        "message":"Quick Canvas",
+        "description":""
+    },
+    "options":{
+        "message":"Options - [WIP]",
+        "description":""
+    },
+    "preview":{
+        "message":"Preview",
+        "description":""
+    },
+    "preview_size":{
+        "message":"Preview Size",
+        "description":""
+    },
+    "preview_onecanvas":{
+        "message":"Show preview with only one canvas",
+        "description":""
+    },
+    "preview_orientation":{
+        "message":"Preview Orientation [WIP]",
+        "description":""
+    },
+    "landscape":{
+        "message":"Lanscape",
+        "description":""
+    },
+    "portrait":{
+        "message":"Portrait",
+        "description":""
+    },
+    "preview_transparent":{
+        "message":"Preview Background Transparent [Transparent WIP]",
+        "description":""
+    },
+    "preview_background":{
+        "message":"Preview Background",
+        "description":""
+    },
+    "preview_update":{
+        "message":"Preview Update",
+        "description":""
+    },
+    "update":{
+        "message":"Update",
+        "description":""
+    },
+    "always":{
+        "message":"Always",
+        "description":""
+    },
+    "hovered":{
+        "message":"When the mouse hovers",
+        "description":""
+    },
+    "keep":{
+        "message":"Keep updating after mouse hover",
+        "description":""
+    },
+    "interval":{
+        "message":"Update interval (ms)",
+        "description":""}
+    }

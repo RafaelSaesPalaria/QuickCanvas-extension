@@ -3,10 +3,11 @@ export function detectLanguage() {
 }
 
 export function applyLanguage(language) {
-    fetch(`../languages/${language}.json`).then(response => response.json()).then(translation => {
+    fetch(`../_locales/${language}/messages.json`).then(response => response.json()).then(translation => {
+        console.log(translation)
         for (let t in translation) {
             if (document.querySelector(`#${t}`)) {
-                document.querySelector(`#${t}`).innerText = `${translation[t]}`
+                document.querySelector(`#${t}`).innerText = `${translation[t].message}`
             }
         }
     }).catch(error => { // Detect a language that is not there 
@@ -14,3 +15,5 @@ export function applyLanguage(language) {
         applyLanguage("en")
     })
 }
+
+/*chrome.i18n.getMessage("messagename")*/

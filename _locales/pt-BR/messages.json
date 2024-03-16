@@ -1,0 +1,70 @@
+{
+    "description": {
+        "message":"Uma solução rapida para baixar canvas",
+        "description":"Descrição da extensão"
+    },
+    "title":{
+        "message":"Quick Canvas",
+        "description":""
+    },
+    "options":{
+        "message":"Opções - [WIP]",
+        "description":""
+    },
+    "preview":{
+        "message":"Prévia",
+        "description":""
+    },
+    "preview_size":{
+        "message":"Tamanho da prévia",
+        "description":""
+    },
+    "preview_onecanvas":{
+        "message":"prévia com só um canvas",
+        "description":""
+    },
+    "preview_orientation":{
+        "message":"Orientação da prévia [WIP]",
+        "description":""
+    },
+    "landscape":{
+        "message":"Paisagem",
+        "description":""
+    },
+    "portrait":{
+        "message":"Retrato",
+        "description":""
+    },
+    "preview_transparent":{
+        "message":"Cor da prévia transparente [Transparente WIP]",
+        "description":""
+    },
+    "preview_background":{
+        "message":"Cor de fundo da prévia",
+        "description":""
+    },
+    "preview_update":{
+        "message":"Atualizações da prévia",
+        "description":""
+    },
+    "update":{
+        "message":"Atualizar prévia",
+        "description":""
+    },
+    "always":{
+        "message":"Sempre",
+        "description":""
+    },
+    "hovered":{
+        "message":"Quando passa o mouse por cima",
+        "description":""
+    },
+    "keep":{
+        "message":"Mantenha atualizando depois de passar o mouse por cima",
+        "description":""
+    },
+    "interval":{
+        "message":"Intervalo de atualizações do canvas (ms)",
+        "description":""
+    }
+}
