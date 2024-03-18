@@ -66,5 +66,9 @@
     "interval":{
         "message":"Intervalo de atualizações do canvas (ms)",
         "description":""
+    },
+    "saved":{
+        "message":"salvo",
+        "description":""
     }
 }

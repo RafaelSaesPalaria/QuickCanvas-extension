@@ -11,8 +11,23 @@ export function applyLanguage(language) {
             }
         }
     }).catch(error => { // Detect a language that is not there 
-        console.log("Language not avaliable, changing to en")
-        applyLanguage("en")
+        if (language!="en") {
+            console.log("Language not avaliable, changing to en")
+            applyLanguage("en")
+        } else {
+            console.log(error)
+        }
+    })
+}
+
+export function getTranslation(dataName) {
+    let language = (navigator.language || navigator.userLanguage)
+    fetch(`../_locales/${language}/messages.json`).then(response => response.json()).then( translation => {
+        return translation[dataName]["message"]
+    }).catch(error => {
+        fetch(`../_locales/en/messages.json`).then(response => response.json()).then( translation => {
+            return translation[dataName]["message"]
+        })
     })
 }
 

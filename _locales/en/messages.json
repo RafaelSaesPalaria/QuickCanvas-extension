@@ -65,5 +65,10 @@
     },
     "interval":{
         "message":"Update interval (ms)",
-        "description":""}
+        "description":""
+    },
+    "saved":{
+        "message":"saved",
+        "description":""
     }
+}

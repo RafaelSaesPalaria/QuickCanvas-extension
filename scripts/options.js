@@ -17,7 +17,7 @@
 
 import { storedData, chromeStorage } from "./storage.js"
 
-import { detectLanguage } from "./language.js"
+import { detectLanguage, getTranslation } from "./language.js"
 
 detectLanguage()
 
@@ -25,18 +25,18 @@ var components   = {
     submit: document.querySelector('input[type="submit"]#submit'),
     reset: document.querySelector('input[type=reset]#reset'),
     preview: {
-        size: document.querySelector('input[type="range"]#preview-size'),
-        onecanvas: document.querySelector('input[type="checkbox"]#preview-onecanvas'),
-        landscape: document.querySelector('input[type="radio"]#preview-orientation-landscape'),
-        portrait: document.querySelector('input[type="radio"]#preview-orientation-portrait'),
-        transparent: document.querySelector('input[type="checkbox"]#preview-background-transparent'),
-        color: document.querySelector('input[type="color"]#preview-background-color'),
+        size: document.querySelector('input[type="range"]#preview_size'),
+        onecanvas: document.querySelector('input[type="checkbox"]#preview_onecanvas'),
+        landscape: document.querySelector('input[type="radio"]#preview_orientation_landscape'),
+        portrait: document.querySelector('input[type="radio"]#preview_orientation_portrait'),
+        transparent: document.querySelector('input[type="checkbox"]#preview_background_transparent'),
+        color: document.querySelector('input[type="color"]#preview_background_color'),
     },
     update: {
-        always: document.querySelector('input[type="radio"]#update-always'),
-        hovered: document.querySelector('input[type="radio"]#update-hovered'),
-        keep: document.querySelector('input[type="checkbox"]#update-keep'),
-        interval: document.querySelector('input[type="number"]#update-interval')
+        always: document.querySelector('input[type="radio"]#update_always'),
+        hovered: document.querySelector('input[type="radio"]#update_hovered'),
+        keep: document.querySelector('input[type="checkbox"]#update_keep'),
+        interval: document.querySelector('input[type="number"]#update_interval')
     }
 }
 
@@ -80,9 +80,10 @@ function applyCallbackToData(callback) {
         }
     }
     if (callback[storedData.preview.orientationC]) {
-    document.querySelector(`#${callback[storedData.preview.orientationC]}`).checked = true
+        document.querySelector(`#${callback[storedData.preview.orientationC]}`).checked = true
     }
     if (callback[storedData.update.canvas]) {
+        console.log(callback[storedData.update.canvas])
         document.querySelector(`#${callback[storedData.update.canvas]}`).checked=true
     }
     applyOnChange(components.preview.landscape,storedData.preview.orientationC)
@@ -92,6 +93,7 @@ function applyCallbackToData(callback) {
 }
 
 function applyOnChange(component,storedName) {
+    console.log(component, storedName)
     if (component) {
         component.addEventListener("change",function (event) {
             showSaved(component)
@@ -126,7 +128,7 @@ function showSaved(component) {
     d.style.color = "green"
     d.style.display = "inline"
     //TODO change save language
-    d.innerText = "salvo"
+    d.innerText = getTranslation("saved")
     console.log(component)
     component.parentNode.appendChild(d);
 
