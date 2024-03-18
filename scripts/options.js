@@ -17,9 +17,11 @@
 
 import { storedData, chromeStorage } from "./storage.js"
 
-import { detectLanguage, getTranslation } from "./language.js"
+import { applyLanguage, getTranslation, detectLanguage } from "./language.js"
 
-detectLanguage()
+detectLanguage().then(() => {
+    applyLanguage()
+})
 
 var components   = {
     submit: document.querySelector('input[type="submit"]#submit'),
