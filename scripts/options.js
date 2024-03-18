@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { storedData, chromeStorage } from "./storage.js"
+import { storedData, chromeStorage, defaultData } from "./storage.js"
 
 import { applyLanguage, getTranslation, detectLanguage } from "./language.js"
 
@@ -42,27 +42,13 @@ var components   = {
     }
 }
 
-var data = {
-    preview: {
-        size: 150,
-        onecanvas: true,
-        orientationC: "portrait",
-        color: "rgb(255,255,255)"
-    },
-    update: {
-        canvas: "update-hovered",
-        keep: true,
-        interval: 1000
-    }
-}
-
 chromeStorage().getAll(function (callback) {
     applyCallbackToData(callback)
 })
 
 function applyCallbackToData(callback) {
-    for (let key0 in data) {
-        for (let key1 in data[key0]) {
+    for (let key0 in defaultData) {
+        for (let key1 in defaultData[key0]) {
 
             if (components[key0][key1]) {
 

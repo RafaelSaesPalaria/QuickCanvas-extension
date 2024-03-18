@@ -29,6 +29,20 @@ export var storedData = {
   }
 }
 
+export var defaultData = {
+  preview: {
+      size: 150,
+      onecanvas: true,
+      orientationC: "portrait",
+      color: "rgb(255,255,255)"
+  },
+  update: {
+      canvas: "update-hovered",
+      keep: true,
+      interval: 1000
+  }
+}
+
 export function chromeStorage() {
     function getAll(callback) {
         chrome.storage.sync.get(function(total){

@@ -15,35 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { chromeStorage, storedData } from "./storage.js"
+import { chromeStorage, storedData, defaultData } from "./storage.js"
 
-import { detectLanguage } from "./language.js"
+import { applyLanguage, detectLanguage } from "./language.js"
 
-detectLanguage()
-
-var data = {
-    preview: {
-        size: 150,
-        onecanvas: true,
-        orientationC: "portrait",
-        color: "rgb(255,255,255)"
-    },
-    update: {
-        canvas: "update-hovered",
-        keep: true,
-        interval: 1000
-    }
-}
+detectLanguage().then(() => {
+    applyLanguage()
+})
 
 chromeStorage().getAll(function (callback) {
     applyCallbackToData(callback)
 })
 
 function applyCallbackToData(callback) {
-    for (let key0 in data) {
-        for (let key1 in data[key0]) {
+    for (let key0 in defaultData) {
+        for (let key1 in defaultData[key0]) {
             if (callback[storedData[key0][key1]]) {
-                data[key0][key1] = callback[storedData[key0][key1]]
+                defaultData[key0][key1] = callback[storedData[key0][key1]]
             }
         }
     }
@@ -56,11 +44,11 @@ function applyCallbackToData(callback) {
 
 
 //TODO/ERROR: when popup is open by the second time the canvas doesnt download as fast
-chrome.runtime.sendMessage({todo:"miniatureCanvas-All",size:data.preview.size})
+chrome.runtime.sendMessage({todo:"miniatureCanvas-All",size:defaultData.preview.size})
 
 /* The Miniature appears when theres only one canvas?*/
 var interval = 0
-var oneMiniature = data.preview.onecanvas;
+var oneMiniature = defaultData.preview.onecanvas;
 
 chrome.runtime.onMessage.addListener(function (message) {
     console.log(message)
@@ -110,22 +98,22 @@ function createMiniatures(message) {
 function createCanvas(id) {
     let canvas = document.createElement("canvas");
     document.body.appendChild(canvas)
-    canvas.style.backgroundColor = data.preview.color
+    canvas.style.backgroundColor = defaultData.preview.color
 
-    canvas.width = data.preview.size
-    canvas.height= data.preview.size
+    canvas.width = defaultData.preview.size
+    canvas.height= defaultData.preview.size
 
     canvas.addEventListener("click",function () {
         downloadCanvas(id)
     })
-    if (data.update.canvas == "update-always") {
-        interval = setInterval(function () {miniatureCanvas(id)},data.update.interval)
+    if (defaultData.update.canvas == "update-always") {
+        interval = setInterval(function () {miniatureCanvas(id)},defaultData.update.interval)
     } else {
         canvas.addEventListener("mouseover", function() {
             clearInterval(interval)
-            interval = setInterval(function () {miniatureCanvas(id)},data.update.interval)
+            interval = setInterval(function () {miniatureCanvas(id)},defaultData.update.interval)
         })
-        if (data.update.keep != true) {
+        if (defaultData.update.keep != true) {
             canvas.addEventListener("mouseout", function() {
                 clearInterval(interval)
             })
@@ -135,7 +123,7 @@ function createCanvas(id) {
 }
 
 function miniatureCanvas(id) {
-        chrome.runtime.sendMessage({todo:"miniatureCanvas","id":id,"size":data.preview.size})
+        chrome.runtime.sendMessage({todo:"miniatureCanvas","id":id,"size":defaultData.preview.size})
 }
 
 function downloadCanvas(id) {
