@@ -22,11 +22,13 @@ export function applyLanguage(language) {
 
 export function getTranslation(dataName) {
     let language = (navigator.language || navigator.userLanguage)
-    fetch(`../_locales/${language}/messages.json`).then(response => response.json()).then( translation => {
-        return translation[dataName]["message"]
-    }).catch(error => {
-        fetch(`../_locales/en/messages.json`).then(response => response.json()).then( translation => {
-            return translation[dataName]["message"]
+    return new Promise((resolve, reject) => {
+        fetch(`../_locales/${language}/messages.json`).then(response => response.json()).then( translation => {
+            resolve(translation[dataName]["message"])
+        }).catch(error => {
+            fetch(`../_locales/en/messages.json`).then(response => response.json()).then( translation => {
+                resolve(translation[dataName]["message"])
+            })
         })
     })
 }

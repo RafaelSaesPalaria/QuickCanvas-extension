@@ -128,8 +128,10 @@ function showSaved(component) {
     d.style.color = "green"
     d.style.display = "inline"
     //TODO change save language
-    d.innerText = getTranslation("saved")
-    console.log(component)
+    getTranslation("saved").then(translation => {
+        console.log(translation)
+        d.innerText = translation
+    })
     component.parentNode.appendChild(d);
 
     setTimeout( function() {
