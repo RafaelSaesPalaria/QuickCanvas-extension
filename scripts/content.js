@@ -90,14 +90,13 @@ function miniatureCanvas_All(size) {
 function resizeTo(canvas, size) {
     let tmpCanvas = document.createElement("canvas")
     tmpCanvas = Object.assign(tmpCanvas,canvas)
-    if (canvas.height>canvas.width) {
-        let r = canvas.width/canvas.height
-        tmpCanvas.width = r*size
-        tmpCanvas.height= size
-    } else {
-        let r = canvas.height/canvas.width
-        tmpCanvas.height =r*size
-        tmpCanvas.width = size
-    }
+
+    let bigger = Math.max(canvas.height, canvas.width)
+    let smaller = Math.min(canvas.height, canvas.width)
+
+    let r = smaller/bigger
+    tmpCanvas.width = (smaller == canvas.width) ? size*r : size  // The Smallest size
+    tmpCanvas.height= (smaller == canvas.height) ? size*r : size // multiply by r
+
     return tmpCanvas
 }
