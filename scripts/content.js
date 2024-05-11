@@ -20,7 +20,7 @@
 chrome.runtime.onMessage.addListener(function name(message) {
 
     if (!message.size) {
-        message.size = 150
+        message.size = 150 // Default size
     }
 
     if (message.todo == "downloadCanvas") {
@@ -32,6 +32,11 @@ chrome.runtime.onMessage.addListener(function name(message) {
     }
 })
 
+/**
+ * @Called When the popup send a message to download a canvas (click on canvas)
+ * @Do Create a virtual link and download the canvas in it's full size
+ * @param {Number} id the id of the canvas
+ */
 function downloadCanvas(id) {
     let canvas = document.querySelectorAll("canvas")[id]
     let link = document.createElement("a")
@@ -41,9 +46,14 @@ function downloadCanvas(id) {
     link.click()
 }
 
+/**
+ * @Called When the popup send a message to get a miniature of a canvas (mouse hover)
+ * @Do Create a copy of the canvas in the popup size and send it as a base64 string
+ * @param {Number} id the id of the canvas
+ * @param {Number} size the size of the canvas
+ */
 function miniatureCanvas(id,size) {
     let canvas = document.querySelectorAll("canvas")[id]
-    //TODO: change the resize value from 300 to the stored value
     let tmpCanvas = resizeTo(canvas, size)
 
     tmpCanvas.getContext("2d").drawImage(canvas,0,0,tmpCanvas.width, tmpCanvas.height)
@@ -51,6 +61,11 @@ function miniatureCanvas(id,size) {
     chrome.runtime.sendMessage({canvas,"todo":"edit","id":id})
 }
 
+/**
+ * @Called When the popup send a message to get the miniature of all canvas (PopupOpen)
+ * @Do create a copy of all canvas redraw in the desired size and send it as a base64
+ * @param {Number} size desired size 
+ */
 function miniatureCanvas_All(size) {
     let canvasd = document.querySelectorAll("canvas")
     let canvas = {}
@@ -64,6 +79,14 @@ function miniatureCanvas_All(size) {
     chrome.runtime.sendMessage({canvas,"todo":"create"})
 }
 
+/**
+ * @Called when a miniature is created
+ * @Do Create a copy of the canvas and set its proportions to maintain the shape 
+ * but with the size as a max value of the biggest side
+ * @param {HTMLCanvasElement} canvas the canvas to be resized
+ * @param {Number} size max size of the biggest side [to maintain the shape] 
+ * @returns A Copy of the canvas but in desired size
+ */
 function resizeTo(canvas, size) {
     let tmpCanvas = document.createElement("canvas")
     tmpCanvas = Object.assign(tmpCanvas,canvas)
