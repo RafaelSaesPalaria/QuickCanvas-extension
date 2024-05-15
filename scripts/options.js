@@ -94,7 +94,7 @@ function applyCallbackToData(callback) {
 function applyOnChange(component,storedName) {
     console.log(component, storedName)
     if (component) {
-        component.addEventListener("change",function (event) {
+        component.addEventListener("change",function (event) { //input for more speed
             showSaved(component)
             if (component.type == "checkbox") {
                 chromeStorage().set(storedName,event.target.checked)
@@ -115,15 +115,33 @@ function applyOnChange(component,storedName) {
  * @Do create a miniature showing the actual size
  */
 function showSize() {
-    let c = document.createElement("canvas")
-    c.width = components.preview.size.value
-    c.height= components.preview.size.value
-    components.preview.size.parentNode.appendChild(c);
-    c.style.position = "absolute"
-    c.style.display = "float"
-    setTimeout( function() {
-        c.remove()
-    },300)
+    if (!document.querySelector('#showSize')) {
+        let c = document.createElement("canvas")
+        c.id = 'showSize'
+        c.width = components.preview.size.value
+        c.height= components.preview.size.value
+        components.preview.size.parentNode.appendChild(c);
+        c.style.position = "absolute"
+        c.style.display = "float"
+        let ctx=c.getContext('2d')
+        chromeStorage().getByName(storedData.preview.color,(color) => {
+            ctx.fillStyle = color
+            ctx.fillRect(0,0,c.width,c.height)
+        })
+        
+        setTimeout( function() {
+            c.remove()
+        },300)
+    } else {
+        let c = document.querySelector('#showSize')
+        c.width = components.preview.size.value
+        c.height = components.preview.size.value
+        let ctx = c.getContext('2d')
+        chromeStorage().getByName(storedData.preview.color,(color) => {
+            ctx.fillStyle = color
+            ctx.fillRect(0,0,c.width,c.height)
+        })
+    }
 }
 
 /**
@@ -132,19 +150,22 @@ function showSize() {
  * @param {HTMLElement} component 
  */
 function showSaved(component) {
-    let d = document.createElement("span")
-    d.style.color = "green"
-    d.style.display = "inline"
-    //TODO change save language
-    getTranslation("saved").then(translation => {
-        console.log(translation)
-        d.innerText = translation
-    })
-    component.parentNode.appendChild(d);
+    if (!document.querySelector('#saved')) {
+        let d = document.createElement("span")
+        d.id = 'saved'
+        d.style.color = "green"
+        d.style.display = "inline"
+        //TODO change save language
+        getTranslation("saved").then(translation => {
+            console.log(translation)
+            d.innerText = translation
+        })
+        component.parentNode.appendChild(d);
 
-    setTimeout( function() {
-        d.remove()
-    },300)
+        setTimeout( function() {
+            d.remove()
+        },300)
+    }
 }
 
 //console.log(chromeStorage().getByName(storedData.previewOnecanvas))
