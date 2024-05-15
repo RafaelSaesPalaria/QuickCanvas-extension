@@ -43,19 +43,41 @@ export var defaultData = {
   }
 }
 
+/**
+ * @Called When a item is stores/acess
+ * @Do Store/Acess the data
+ * @returns the methods to acess/store
+ */
 export function chromeStorage() {
+  /**
+   * @Called When the option.html is open
+   * @Do get all the stored info
+   * @param {Function} callback the return method with the data
+   */
     function getAll(callback) {
         chrome.storage.sync.get(function(total){
             callback(total)
           })
     }
   
+    /**
+     * @Called ------------
+     * @Do Get a value by its name
+     * @param {String} name The key of the item
+     * @param {Function} callback the return method with the data
+     */
     function getByName(name,callback) {
       chrome.storage.sync.get(function(total){
         callback(total[name])
       })
     }
 
+    /**
+     * @Called When a value is added/changed
+     * @Do Set the value of the key
+     * @param {String} key 
+     * @param {String} value 
+     */
     function set(key,value) {
         let data = {}
         data[key] = value
