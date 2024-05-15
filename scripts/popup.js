@@ -16,17 +16,26 @@
  */
 
 import { chromeStorage, storedData, defaultData } from "./storage.js"
-
 import { applyLanguage, detectLanguage } from "./language.js"
 
+/**
+ * @Called When the popup is opened
+ * @Do detect and set the language of the application
+ */
 detectLanguage().then(() => {
     applyLanguage()
 })
 
+
+
+/**
+ * @Called When the popup is opened
+ * @Do Set the values of the storedData to the actualData 'default'
+ * @param {Function} callback 
+ */
 chromeStorage().getAll(function (callback) {
     applyCallbackToData(callback)
 })
-
 function applyCallbackToData(callback) {
     for (let key0 in defaultData) {
         for (let key1 in defaultData[key0]) {
