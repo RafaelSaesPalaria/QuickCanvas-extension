@@ -42,10 +42,15 @@ var components   = {
     }
 }
 
+
+/**
+ * @Called When the options are called
+ * @Do Apply the values stored to the html and set the listeners
+ * @param {Function} callback 
+ */
 chromeStorage().getAll(function (callback) {
     applyCallbackToData(callback)
 })
-
 function applyCallbackToData(callback) {
     for (let key0 in defaultData) {
         for (let key1 in defaultData[key0]) {
@@ -80,6 +85,12 @@ function applyCallbackToData(callback) {
     applyOnChange(components.update.hovered,storedData.update.canvas)
 }
 
+/**
+ * @Called When the options are called
+ * @Do Make the listeners
+ * @param {HTMLElement} component the component that change the value
+ * @param {String} storedName the stored value that is gonna change with the component
+ */
 function applyOnChange(component,storedName) {
     console.log(component, storedName)
     if (component) {
@@ -99,6 +110,10 @@ function applyOnChange(component,storedName) {
     }
 }
 
+/**
+ * @Called When the size option is changed
+ * @Do create a miniature showing the actual size
+ */
 function showSize() {
     let c = document.createElement("canvas")
     c.width = components.preview.size.value
@@ -111,6 +126,11 @@ function showSize() {
     },300)
 }
 
+/**
+ * @Called When a component change
+ * @Do Create a span to show that the component data is saved
+ * @param {HTMLElement} component 
+ */
 function showSaved(component) {
     let d = document.createElement("span")
     d.style.color = "green"
