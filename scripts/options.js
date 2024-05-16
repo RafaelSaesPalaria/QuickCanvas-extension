@@ -24,21 +24,19 @@ detectLanguage().then(() => {
 })
 
 var components   = {
-    submit: document.querySelector('input[type="submit"]#submit'),
-    reset: document.querySelector('input[type=reset]#reset'),
     preview: {
-        size: document.querySelector('input[type="range"]#preview_size'),
-        onecanvas: document.querySelector('input[type="checkbox"]#preview_onecanvas'),
-        landscape: document.querySelector('input[type="radio"]#preview_orientation_landscape'),
-        portrait: document.querySelector('input[type="radio"]#preview_orientation_portrait'),
-        transparent: document.querySelector('input[type="checkbox"]#preview_background_transparent'),
-        color: document.querySelector('input[type="color"]#preview_background_color'),
+        size: document.querySelector('input#preview_size'),
+        onecanvas: document.querySelector('input#preview_onecanvas'),
+        landscape: document.querySelector('input#preview_orientation_landscape'),
+        portrait: document.querySelector('input#preview_orientation_portrait'),
+        transparent: document.querySelector('input#preview_background_transparent'),
+        color: document.querySelector('input#preview_background_color'),
     },
     update: {
-        always: document.querySelector('input[type="radio"]#update_always'),
-        hovered: document.querySelector('input[type="radio"]#update_hovered'),
-        keep: document.querySelector('input[type="checkbox"]#update_keep'),
-        interval: document.querySelector('input[type="number"]#update_interval')
+        always: document.querySelector('input#update_always'),
+        hovered: document.querySelector('input#update_hovered'),
+        keep: document.querySelector('input#update_keep'),
+        interval: document.querySelector('input#update_interval')
     }
 }
 
