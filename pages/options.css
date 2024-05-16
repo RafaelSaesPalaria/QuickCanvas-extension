@@ -12,3 +12,8 @@ canvas {
     border: 1px solid black;
     display: inline-block;
 }
+
+#saved {
+    color: green;
+    display: inline;
+}

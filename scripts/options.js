@@ -153,15 +153,10 @@ function showSaved(component) {
     if (!document.querySelector('#saved')) {
         let d = document.createElement("span")
         d.id = 'saved'
-        d.style.color = "green"
-        d.style.display = "inline"
-        //TODO change save language
         getTranslation("saved").then(translation => {
-            console.log(translation)
             d.innerText = translation
         })
         component.parentNode.appendChild(d);
-
         setTimeout( function() {
             d.remove()
         },300)
