@@ -64,8 +64,15 @@ function applyCallbackToData(callback) {
             }
 
             //Listening
-            if (storedData[key0][key1]) { 
-                applyOnChange(components[key0][key1],storedData[key0][key1])
+            if (storedData[key0][key1]) {
+                if (components[key0][key1]) {
+                    let valueType = 'value'
+                    if ((components[key0][key1].type==='checkbox') ||
+                        (components[key0][key1].type==='radio')) {
+                        valueType = 'checked'
+                    } 
+                    applyOnChange(components[key0][key1],storedData[key0][key1],valueType)
+                }
             }
 
         }
@@ -77,10 +84,10 @@ function applyCallbackToData(callback) {
         console.log(callback[storedData.update.canvas])
         document.querySelector(`#${callback[storedData.update.canvas]}`).checked=true
     }
-    applyOnChange(components.preview.landscape,storedData.preview.orientationC)
-    applyOnChange(components.preview.portrait,storedData.preview.orientationC)
-    applyOnChange(components.update.always,storedData.update.canvas)
-    applyOnChange(components.update.hovered,storedData.update.canvas)
+    applyOnChange(components.preview.landscape,storedData.preview.orientationC,'id')
+    applyOnChange(components.preview.portrait,storedData.preview.orientationC,'id')
+    applyOnChange(components.update.always,storedData.update.canvas,'id')
+    applyOnChange(components.update.hovered,storedData.update.canvas,'id')
 }
 
 /**
@@ -88,22 +95,17 @@ function applyCallbackToData(callback) {
  * @Do Make the listeners
  * @param {HTMLElement} component the component that change the value
  * @param {String} storedName the stored value that is gonna change with the component
+ * @param {String} valueType the type of value that is gonna be stored ex:
+ * (id, value, checked)
  */
-function applyOnChange(component,storedName) {
-    console.log(component, storedName)
+function applyOnChange(component,storedName,valueType) {
     if (component) {
         component.addEventListener("change",function (event) { //input for more speed
             showSaved(component)
-            if (component.type == "checkbox") {
-                chromeStorage().set(storedName,event.target.checked)
-            } else if (component.type != "radio") {
-                if (component.type == "range") {
-                    showSize()
-                }
-                chromeStorage().set(storedName,event.target.value)
-            } else {
-                chromeStorage().set(storedName,event.target.id)
+            if (component.type == "range") {
+                showSize()
             }
+            chromeStorage().set(storedName,event.target[valueType])
         })
     }
 }
