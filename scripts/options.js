@@ -99,12 +99,13 @@ function applyCallbackToData(callback) {
  * (id, value, checked)
  */
 function applyOnChange(component,storedName,valueType) {
+    let show = (component) => {showSaved(component)}
+    if (component === components.preview.size) {
+        show = (component) => {showSize(); showSaved(component)}
+    }
     if (component) {
         component.addEventListener("change",function (event) { //input for more speed
-            showSaved(component)
-            if (component.type == "range") {
-                showSize()
-            }
+            show(component)
             chromeStorage().set(storedName,event.target[valueType])
         })
     }
