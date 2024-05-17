@@ -116,33 +116,27 @@ function applyOnChange(component,storedName,valueType) {
  * @Do create a miniature showing the actual size
  */
 function showSize() {
+    let c 
     if (!document.querySelector('#showSize')) {
-        let c = document.createElement("canvas")
+        c = document.createElement("canvas")
         c.id = 'showSize'
-        c.width = components.preview.size.value
-        c.height= components.preview.size.value
-        components.preview.size.parentNode.appendChild(c);
         c.style.position = "absolute"
         c.style.display = "float"
-        let ctx=c.getContext('2d')
-        chromeStorage().getByName(storedData.preview.color,(color) => {
-            ctx.fillStyle = color
-            ctx.fillRect(0,0,c.width,c.height)
-        })
-        
-        setTimeout( function() {
-            c.remove()
-        },300)
+        components.preview.size.parentNode.appendChild(c);
     } else {
-        let c = document.querySelector('#showSize')
-        c.width = components.preview.size.value
-        c.height = components.preview.size.value
-        let ctx = c.getContext('2d')
-        chromeStorage().getByName(storedData.preview.color,(color) => {
-            ctx.fillStyle = color
-            ctx.fillRect(0,0,c.width,c.height)
-        })
+        c = document.querySelector('#showSize')
     }
+    c.width = components.preview.size.value
+    c.height = components.preview.size.value
+    let ctx=c.getContext('2d')
+    chromeStorage().getByName(storedData.preview.color,(color) => {
+        ctx.fillStyle = color
+        ctx.fillRect(0,0,c.width,c.height)
+    })
+    
+    setTimeout( function() {
+        c.remove()
+    },300)
 }
 
 /**
