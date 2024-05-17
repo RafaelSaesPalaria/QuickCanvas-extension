@@ -120,19 +120,14 @@ function showSize() {
     if (!document.querySelector('#showSize')) {
         c = document.createElement("canvas")
         c.id = 'showSize'
-        c.style.position = "absolute"
-        c.style.display = "float"
         components.preview.size.parentNode.appendChild(c);
     } else {
         c = document.querySelector('#showSize')
     }
-    c.width = components.preview.size.value
-    c.height = components.preview.size.value
+    c.width = c.height = components.preview.size.value
     let ctx=c.getContext('2d')
-    chromeStorage().getByName(storedData.preview.color,(color) => {
-        ctx.fillStyle = color
-        ctx.fillRect(0,0,c.width,c.height)
-    })
+    ctx.fillStyle = components.preview.color.value
+    ctx.fillRect(0,0,c.width,c.height)
     
     setTimeout( function() {
         c.remove()
