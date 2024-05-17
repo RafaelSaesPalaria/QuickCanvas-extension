@@ -52,23 +52,21 @@ chromeStorage().getAll(function (callback) {
 function applyCallbackToData(callback) {
     for (let key0 in defaultData) {
         for (let key1 in defaultData[key0]) {
-
             if (components[key0][key1]) {
 
                 //Loading
-                if (components[key0][key1].type == "checkbox") {
-                    components[key0][key1].checked = callback[storedData[key0][key1]]
-                } else if (components[key0][key1].type != "radio") {
-                    components[key0][key1].value = callback[storedData[key0][key1]]
+                let valueType = 'value'
+                if (components[key0][key1].type === "checkbox") {
+                    valueType = 'checked'
                 }
+                components[key0][key1][valueType] = callback[storedData[key0][key1]]
             }
 
             //Listening
             if (storedData[key0][key1]) {
                 if (components[key0][key1]) {
                     let valueType = 'value'
-                    if ((components[key0][key1].type==='checkbox') ||
-                        (components[key0][key1].type==='radio')) {
+                    if (components[key0][key1].type==='checkbox') {
                         valueType = 'checked'
                     } 
                     applyOnChange(components[key0][key1],storedData[key0][key1],valueType)
@@ -99,11 +97,11 @@ function applyCallbackToData(callback) {
  * (id, value, checked)
  */
 function applyOnChange(component,storedName,valueType) {
-    let show = (component) => {showSaved(component)}
-    if (component === components.preview.size) {
-        show = (component) => {showSize(); showSaved(component)}
-    }
     if (component) {
+        let show = (component) => {showSaved(component)}
+        if (component === components.preview.size) {
+            show = (component) => {showSize(); showSaved(component)}
+        }
         component.addEventListener("change",function (event) { //input for more speed
             show(component)
             chromeStorage().set(storedName,event.target[valueType])
