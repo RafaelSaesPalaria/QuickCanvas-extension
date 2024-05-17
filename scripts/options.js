@@ -52,24 +52,18 @@ chromeStorage().getAll(function (callback) {
 function applyCallbackToData(callback) {
     for (let key0 in defaultData) {
         for (let key1 in defaultData[key0]) {
-            if (components[key0][key1]) {
-
-                //Loading
-                let valueType = 'value'
-                if (components[key0][key1].type === "checkbox") {
-                    valueType = 'checked'
-                }
-                components[key0][key1][valueType] = callback[storedData[key0][key1]]
-            }
-
+            let component = components[key0][key1]
+            let storedValue = storedData[key0][key1]
+            
             //Listening
-            if (storedData[key0][key1]) {
-                if (components[key0][key1]) {
+            if (storedValue) {
+                if (component) {
                     let valueType = 'value'
-                    if (components[key0][key1].type==='checkbox') {
+                    if (component.type==='checkbox') {
                         valueType = 'checked'
-                    } 
-                    applyOnChange(components[key0][key1],storedData[key0][key1],valueType)
+                    }
+                    component[valueType] = callback[storedValue]
+                    applyOnChange(component,storedValue,valueType)
                 }
             }
 
