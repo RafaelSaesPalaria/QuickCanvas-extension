@@ -28,7 +28,8 @@ chrome.runtime.onMessage.addListener(function name(message) {
     } else if (message.todo == "miniatureCanvas-All") {
         miniatureCanvas_All(message.size)
     } else if (message.todo == "miniatureCanvas") {
-        miniatureCanvas(message.id,message.size)
+        let canvas = miniatureCanvas(message.id,message.size)
+        chrome.runtime.sendMessage({canvas,"todo":"edit","id":message.id})
     }
 })
 
@@ -51,6 +52,7 @@ function downloadCanvas(id) {
  * @Do Create a copy of the canvas in the popup size and send it as a base64 string
  * @param {Number} id the id of the canvas
  * @param {Number} size the size of the canvas
+ * @returns canvas base64 string
  */
 function miniatureCanvas(id,size) {
     let canvas = document.querySelectorAll("canvas")[id]
@@ -58,7 +60,7 @@ function miniatureCanvas(id,size) {
 
     tmpCanvas.getContext("2d").drawImage(canvas,0,0,tmpCanvas.width, tmpCanvas.height)
     canvas = tmpCanvas.toDataURL()
-    chrome.runtime.sendMessage({canvas,"todo":"edit","id":id})
+    return canvas
 }
 
 /**
@@ -70,11 +72,7 @@ function miniatureCanvas_All(size) {
     let canvasd = document.querySelectorAll("canvas")
     let canvas = {}
     for (let i=0; i<canvasd.length;i++) {
-        //TODO: change the resize value from 300 to the stored value
-        let tmpCanvas = resizeTo(canvasd[i], size)
-
-        tmpCanvas.getContext("2d").drawImage(canvasd[i],0,0,tmpCanvas.width, tmpCanvas.height)
-        canvas[i] = tmpCanvas.toDataURL()
+        canvas[i] = miniatureCanvas(i,size)
     }
     chrome.runtime.sendMessage({canvas,"todo":"create"})
 }
