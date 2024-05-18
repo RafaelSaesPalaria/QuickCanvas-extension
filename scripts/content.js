@@ -19,9 +19,7 @@
 
 chrome.runtime.onMessage.addListener(function name(message) {
 
-    if (!message.size) {
-        message.size = 150 // Default size
-    }
+    message.size = message.size ? message.size : 150
 
     if (message.todo == "downloadCanvas") {
         downloadCanvas(message.id)

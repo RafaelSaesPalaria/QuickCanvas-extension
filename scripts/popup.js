@@ -87,18 +87,15 @@ function createMiniatures(message) {
         let c = canvas.getContext("2d")
         let img = new Image();
         img.onload = function() {
-            if (img.height>img.width) {
-            let r = img.width/img.height
-            canvas.width = r*canvas.height
-            c.drawImage(img, 0, 0, r*canvas.height, canvas.height); // Draw the image onto the canvas
-            
-            } else {
-                let r = img.height/img.width
-                canvas.height = r*canvas.width
-                c.drawImage(img, 0, 0, canvas.width, r*canvas.width);
-                
-                
-            }
+            let bigger = Math.max(img.height, img.width)
+            let smaller = Math.min(img.height, img.width)
+
+            let r = smaller/bigger
+
+            canvas.width = smaller===img.width ? r*img.height : img.width     
+            canvas.height = smaller===img.height ? r*img.width : img.height
+
+            c.drawImage(img, 0,0, canvas.width, canvas.height)
         };
         img.src = message.canvas[i]
     }
