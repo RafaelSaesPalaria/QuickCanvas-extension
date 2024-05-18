@@ -33,7 +33,7 @@ export var defaultData = {
   preview: {
       size: 150,
       onecanvas: true,
-      orientationC: "portrait",
+      orientationC: "preview_orientation_landscape",
       color: "rgb(255,255,255)"
   },
   update: {

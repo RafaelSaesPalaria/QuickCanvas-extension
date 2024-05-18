@@ -63,8 +63,18 @@ chrome.runtime.onMessage.addListener(function (message) {
     console.log(message)
     if (message.todo == "create") {
         if (Object.keys(message.canvas).length > !oneMiniature) {
-            //TODO: pass the miniatures desired size in the createMiniatures and in the miniatureCanvas
             createMiniatures(message)
+            if (defaultData.preview.orientationC==='preview_orientation_landscape') {
+                let canvas = document.querySelectorAll('canvas')
+                let totalWidth = 0
+                canvas.forEach((c) => {
+                    console.log(c.width)
+                    totalWidth+=c.width+12
+                })
+                console.log(totalWidth)
+                document.body.style.width = `${totalWidth}px`
+            }
+            
         } else {
             downloadCanvas(0)
         }
@@ -105,9 +115,7 @@ function createCanvas(id) {
     let canvas = document.createElement("canvas");
     document.body.appendChild(canvas)
     canvas.style.backgroundColor = defaultData.preview.color
-
-    canvas.width = defaultData.preview.size
-    canvas.height= defaultData.preview.size
+    canvas.width = canvas.height = defaultData.preview.size
 
     canvas.addEventListener("click",function () {
         downloadCanvas(id)

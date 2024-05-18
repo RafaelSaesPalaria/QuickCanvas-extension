@@ -8,7 +8,7 @@
         "description":""
     },
     "options":{
-        "message":"Opções - [WIP]",
+        "message":"Opções",
         "description":""
     },
     "preview":{
@@ -24,7 +24,7 @@
         "description":""
     },
     "preview_orientation":{
-        "message":"Orientação da prévia [WIP]",
+        "message":"Orientação da prévia",
         "description":""
     },
     "landscape":{

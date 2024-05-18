@@ -8,7 +8,7 @@
         "description":""
     },
     "options":{
-        "message":"Options - [WIP]",
+        "message":"Options",
         "description":""
     },
     "preview":{
@@ -36,7 +36,7 @@
         "description":""
     },
     "preview_transparent":{
-        "message":"Preview Background Transparent [Transparent WIP]",
+        "message":"Preview Background Transparent",
         "description":""
     },
     "preview_background":{
