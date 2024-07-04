@@ -136,6 +136,11 @@ function createCanvas(id) {
     return canvas
 }
 
+/**
+ * @Called when you click in a canvas
+ * @Do send a message to the content.js to give a canvas
+ * @param {Number} id canvas id 
+ */
 function miniatureCanvas(id) {
         chrome.runtime.sendMessage({todo:"miniatureCanvas","id":id,"size":defaultData.preview.size})
 }
