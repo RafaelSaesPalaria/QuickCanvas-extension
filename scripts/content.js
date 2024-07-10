@@ -17,6 +17,10 @@
 
 //TODO: Select ALL Canvas and let the user choose
 
+/**
+ * @Called at the start of the program
+ * @Do redirect the message given by the pageEvent
+ */
 chrome.runtime.onMessage.addListener(function name(message) {
 
     message.size = message.size ? message.size : 150
