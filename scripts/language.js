@@ -1,5 +1,9 @@
 var language
 
+/**
+ * @Called when the popup or options js is opened
+ * @Do detect the language and use it if avaliable, otherwise use english
+ */
 detectLanguage()
 export function detectLanguage() {
     let l = navigator.language || navigator.userLanguage
