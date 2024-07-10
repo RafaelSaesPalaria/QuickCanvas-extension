@@ -116,6 +116,12 @@ function createMiniatures(message) {
     }
 }
 
+/**
+ * @Called when a miniature is created
+ * @Do create a canvas and set its update interval
+ * @param {Number} id id of the desired canvas
+ * @returns 
+ */
 function createCanvas(id) {
     let canvas = document.createElement("canvas");
     document.body.appendChild(canvas)
