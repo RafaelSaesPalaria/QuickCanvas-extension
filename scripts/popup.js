@@ -91,6 +91,11 @@ chrome.runtime.onMessage.addListener(function (message) {
     }
 })
 
+/**
+ * @Called when the content send a 'create' message
+ * @Do draw all the canvas in the message
+ * @param {*} message 
+ */
 function createMiniatures(message) {
     for (let i = 0 ; i < Object.keys(message.canvas).length; i++) {
         let canvas =createCanvas(i)
